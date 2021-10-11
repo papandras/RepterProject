@@ -1,0 +1,12 @@
+@media screen and (max-width: 768px){
+    .bg-image{
+        width: 768px;
+        background-size: contain;
+    }
+    .jaratszam, .tarsasag{
+        display: none;
+    }
+    table{
+        width: 20%;
+    }
+}

@@ -11,11 +11,6 @@
         type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        #tablemenu {
-            margin: auto;
-        }
-    </style>
 </head>
 
 <body>
@@ -68,13 +63,13 @@
                     <li class="list-group-item">Érkezés</li>
                 </ul>
 
-                <table class="table table-hover table-dark">
+                <table class="table table-hover table-dark table-responsive">
                     <thead>
                         <tr>
                             <th scope="col">Időpont</th>
                             <th scope="col">Célállomás</th>
-                            <th scope="col">Légitársaság</th>
-                            <th scope="col">Járatszám</th>
+                            <th scope="col" class="tarsasag">Légitársaság</th>
+                            <th scope="col" class="jaratszam">Járatszám</th>
                             <th scope="col">Terminál</th>
                             <th scope="col">Státusz</th>
                         </tr>
@@ -83,56 +78,56 @@
                         <tr>
                             <td>22:05</td>
                             <td>Milan BGY</td>
-                            <td>Ryanair</td>
-                            <td>FR8411</td>
+                            <td class="tarsasag">Ryanair</td>
+                            <td class="jaratszam">FR8411</td>
                             <td>2B</td>
                             <td>Felszállt 22:39</td>
                         </tr>
                         <tr>
                             <td>22:40</td>
                             <td>Dubai DXB</td>
-                            <td>Emirates</td>
-                            <td>EK114</td>
+                            <td class="tarsasag">Emirates</td>
+                            <td class="jaratszam">EK114</td>
                             <td>2B</td>
                             <td>Felszállt 22:31</td>
                         </tr>
                         <tr>
                             <td>22:45</td>
                             <td>Copenhagen</td>
-                            <td>Norwegian</td>
-                            <td>DY3553</td>
+                            <td class="tarsasag">Norwegian</td>
+                            <td class="jaratszam">DY3553</td>
                             <td>2B</td>
                             <td>Felszállt 22:47</td>
                         </tr>
                         <tr>
                             <td>06:00</td>
                             <td>Paris ORY</td>
-                            <td>Wizz Air</td>
-                            <td>W62367</td>
+                            <td class="tarsasag">Wizz Air</td>
+                            <td class="jaratszam">W62367</td>
                             <td>2B</td>
                             <td>Felszállt 06:15</td>
                         </tr>
                         <tr>
                             <td>06:10</td>
                             <td>Tel Aviv TLV</td>
-                            <td>Wizz Air</td>
-                            <td>W62325</td>
+                            <td class="tarsasag">Wizz Air</td>
+                            <td class="jaratszam">W62325</td>
                             <td>2B</td>
                             <td>Felszállt 06:17</td>
                         </tr>
                         <tr>
                             <td>06:10</td>
                             <td>Tel Aviv TLV</td>
-                            <td>Wizz Air</td>
-                            <td>W62325</td>
+                            <td class="tarsasag">Wizz Air</td>
+                            <td class="jaratszam">W62325</td>
                             <td>2B</td>
                             <td>Felszállt 06:17</td>
                         </tr>
                         <tr>
                             <td>06:10</td>
                             <td>Tel Aviv TLV</td>
-                            <td>Wizz Air</td>
-                            <td>W62325</td>
+                            <td class="tarsasag">Wizz Air</td>
+                            <td class="jaratszam">W62325</td>
                             <td>2B</td>
                             <td>Felszállt 06:17</td>
                         </tr>
