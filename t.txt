@@ -1,0 +1,108 @@
+A flex-direction tulajdonság határozza meg a főtengelyt, és az arra merőleges tengely lesz  mindig a kereszt/másodlagos tengely.
+    flex-direction: row;
+    flex-direction: column;
+
+DISPLAY
+
+Fő tárolóelemre (flex container) kell elhelyezni.
+A tárolóelem a flex érték esetén blokkszintű elem lesz, míg inline-flex érték esetén sorfolytonos elem.
+    display: flex;
+    display: inline-flex;
+
+FLEX-DIRECTION
+
+A flex-direction CSS tulajdonsággal meghatározhatod a tárolóelem főtengelyét és a flex-elemek irányát.
+A fő tárolóelemre kell alkalmazni.
+    flex-direction: row; /*default*/
+    flex-direction: row-reverse;
+    flex-direction: column;
+    flex-direction: column-reverse;
+
+FLEX-WRAP
+
+A flex-wrap CSS tulajdonságot a fő tárolóelemre kell elhelyezni.
+Alapértelmezés szerint a flex-elemek megpróbálnak egy sorba illeszkedni.
+Ha a flex-elemek nem férnek ki egy sorba, akkor beállíthatod, hogy a további elemek a következő „vonalra” kerüljenek.
+
+    flex-wrap: nowrap; /*default*/ (♠A flex-elemek egy sorba kerülne, de így kilóghat a tárolóelemből.)
+    flex-wrap: wrap; (♠A flex-elemek több sorba kerülhetnek felülről lefelé.)
+    flex-wrap: wrap-reverse; (♠A flex-elemek több sorba kerülhetnek alulról felfelé rendeződnek.)
+
+FLEX-GROW
+
+A flex-grow CSS tulajdonságot a flex-elemekre kell alkalmazni.
+Az elem növekedési tényezője.
+
+FLEX-SHRINK
+
+A flex-shrink CSS tulajdonságot a flex-elemre kell elhelyezni.
+Az flex-elem zsugorodási/kicsinyítési tényezője.
+
+FLEX-BASIS
+
+A flex-basis CSS tulajdonságot a flex-elemre kell elhelyezni.
+Meghatározza az elemek kezdő méretét, mielőtt a fennmaradó helyet elosztanák.
+
+ALIGN-CONTENT
+
+A fő tárolóelemre kell alkalmazni.  Alapértelmezett beállítások esetén ez függőleges igazítást jelent.
+Meghatározza, hogy a böngésző hogyan osztja el a tartalmi elemek között a területet a kereszttengely (cross
+axis) mentén. 
+Az egyvonalas flexboxokra nincs hatással.
+
+    align-content: normal; /*default*/ (Alapértelmezett beállítás)
+    align-content: start; (A tároló elem elejére (felülre) igazítja a flex-elemeket.)
+    align-content: center; (A tároló elem közepére igazítja a flex-elemeket.)
+    align-content: end; (A tároló elem végére (alulra) igazítja a flex-elemeket.)
+    align-content: flex-start; (A tároló elem elejére (felülre) igazítja a flex-elemeket.)
+    align-content: flex-end; (A tároló elem végére (alulra) igazítja a flex-elemeket.)
+
+    align-content: space-between; (Egyenletes elosztás, az első flex-elem a tárolóelem elején van, míg az utolsó a végén.)
+    align-content: space-around; (Egyenletes elosztás, egyenlő tér veszi körbe a flex-elemeket az egyes sorokban. Az elemek között kétszer akkora hely van, mint a tároló elem széle és az első/utolsó elem között.)
+    align-content: space-evenly; (A flex-elemek egyenletesen oszlanak el, körülöttük egyenlő tér van.)
+    align-content: stretch; (A flex-elemek automatikusan kitöltik a vonalak közti területet.)
+
+ALIGN-ITEMS
+
+A fő tárolóelemre kell alkalmazni. Alapértelmezett beállítások esetén az aktuális vonalon függőleges irányú 
+igazítást jelent.
+Az összes flex-elem elhelyezésre kerül a keresztirányú tengely mentén az aktuális vonalon.
+
+    align-items: normal; /*default*/ (Alapértelmezett beállítás)
+    align-items: start; (Az aktuális sáv tetejére igazítja a flex-elemeket.)
+    align-items: center; (Az aktuális sáv közepére igazítja a flex-elemeket.)
+    align-items: end; (Az aktuális sáv aljára igazítja a flex-elemeket.)
+    align-items: flex-start; (Figyelembe veszi a flex-direction beállítását.)
+    align-items: flex-end; (Figyelembe veszi a flex-direction beállítását.)
+    align-items: strech; (Keresztirányú tengely mentén megnyújtja az elemeket.)
+
+ALIGN-SELF
+
+A flex-elemre egyénileg kell alkalmazni.  Alapértelmezett beállítások esetén az aktuális vonalon függőleges irányú igazítást jelent egy elemre nézve.
+Az adott flex-elem elhelyezésre kerül a keresztirányú tengely mentén az aktuális vonalon.
+
+    align-self: auto; /*default*/ (Alapértelmezett beállítás)
+    align-self: start; (Az aktuális sáv tetejére igazítja a flex-elemet.)
+    align-self: center; (Az aktuális sáv közepére igazítja a flex-elemet.)
+    align-self: end; (Az aktuális sáv aljára igazítja a flex-elemet.)
+    align-self: flex-start; (Figyelembe veszi a flex-direction beállítását.)
+    align-self: flex-end; (Figyelembe veszi a flex-direction beállítását.)
+    align-self: strech; (Keresztirányú tengely mentén megnyújtja az elemet.)
+
+JUSTIFY-CONTENT
+
+fő tárolóelemre kell alkalmazni.  Alapértelmezett beállítások esetén ez vízszintes igazítást jelent.
+Meghatározza, hogy a böngésző hogyan osztja el a tartalmi elemek között a területet a főtengely mentén. 
+Az egyvonalas flexboxokra nincs hatással.
+
+    justify-content: normal; /*default*/ (Alapértelmezett beállítás)
+    justify-content: start; (A tároló elem elejére igazítja a flex-elemeket.)
+    justify-content: center; (A tároló elem közepére igazítja a flex-elemeket.)
+    justify-content: end; (A tároló elem végére igazítja a flex-elemeket.)
+    justify-content: flex-start; (A tároló elem elejére igazítja a flex-elemeket.)
+    justify-content: flex-end; (A tároló elem végére igazítja a flex-elemeket.)
+
+    justify-content: space-between; (Egyenletes elosztás, az első sor flex-elem az elején van, míg az utolsó a végén.  Az elemek között egyenlő távolságot helyez el.)
+    justify-content: space-around; (Egyenletes elosztás, egyenlő tér veszi körbe a flex-elemeket az egyes oszlopokban.)
+    justify-content: space-evenly; (A flex-elemek egyenletesen oszlanak el, körülöttük egyenlő tér van.)
+    justify-content: stretch; (A flex-elemek automatikusan kitöltik a vonalak közti területet.)
