@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budapest Airport</title>
+    <title>Shenzhen Airport</title>
     <link rel="shortcut icon"
         href="https://w7.pngwing.com/pngs/205/97/png-transparent-airplane-icon-a5-takeoff-computer-icons-flight-airplane.png"
         type="image/x-icon">
@@ -64,66 +64,17 @@
                 <!-- Section: Images -->
                 <div>
                     <div class="row">
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/113.jpg" class="w-100"
-                                    alt="kepgroup1" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
+                    <?php for($i = 111; $i < 117; ++$i): ?>
+                            <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                                <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+                                    <img src="https://mdbootstrap.com/img/new/fluid/city/<?php echo $i ?>.jpg" alt="footerimggroup" class="w-100" />
+                                    <a href="#!">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/111.jpg" class="w-100"
-                                    alt="kepgroup1" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/112.jpg" class="w-100"
-                                    alt="kepgroup1" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/114.jpg" class="w-100"
-                                    alt="kepgroup1" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/115.jpg" class="w-100"
-                                    alt="kepgroup1" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/116.jpg" class="w-100"
-                                    alt="kepgroup1" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
+                        <?php endfor; ?>
                     </div>
                 </div>
                 <!-- Section: Images -->

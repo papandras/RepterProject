@@ -1,3 +1,7 @@
+<?php
+require("request.php");
+?>
+
 <!DOCTYPE html>
 <html lang="hu">
 
@@ -5,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budapest Airport</title>
+    <title>Shenzhen Airport</title>
     <link rel="shortcut icon"
         href="https://w7.pngwing.com/pngs/205/97/png-transparent-airplane-icon-a5-takeoff-computer-icons-flight-airplane.png"
         type="image/x-icon">
@@ -47,7 +51,7 @@
                 <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
                     <div class="d-flex justify-content-center align-items-center h-100">
                         <div class="text-white">
-                            <h1 class="mb-3">Budapest Airport</h1>
+                            <h1 class="mb-3">Shenzhen Airport</h1>
                             <h4 class="mb-3">Járatinformációk</h4>
                         </div>
                     </div>
@@ -57,9 +61,9 @@
         </header>
 
         <main>
-            <div>
+            <div >
                 <ul class="list-group list-group-horizontal" id="tablemenu">
-                    <li class="list-group-item active" aria-current="true">Indulás</li>
+                    <li class="list-group-item" aria-current="true">Indulás</li>
                     <li class="list-group-item">Érkezés</li>
                 </ul>
 
@@ -75,62 +79,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>22:05</td>
-                            <td>Milan BGY</td>
-                            <td class="tarsasag">Ryanair</td>
-                            <td class="jaratszam">FR8411</td>
-                            <td>2B</td>
-                            <td>Felszállt 22:39</td>
-                        </tr>
-                        <tr>
-                            <td>22:40</td>
-                            <td>Dubai DXB</td>
-                            <td class="tarsasag">Emirates</td>
-                            <td class="jaratszam">EK114</td>
-                            <td>2B</td>
-                            <td>Felszállt 22:31</td>
-                        </tr>
-                        <tr>
-                            <td>22:45</td>
-                            <td>Copenhagen</td>
-                            <td class="tarsasag">Norwegian</td>
-                            <td class="jaratszam">DY3553</td>
-                            <td>2B</td>
-                            <td>Felszállt 22:47</td>
-                        </tr>
-                        <tr>
-                            <td>06:00</td>
-                            <td>Paris ORY</td>
-                            <td class="tarsasag">Wizz Air</td>
-                            <td class="jaratszam">W62367</td>
-                            <td>2B</td>
-                            <td>Felszállt 06:15</td>
-                        </tr>
-                        <tr>
-                            <td>06:10</td>
-                            <td>Tel Aviv TLV</td>
-                            <td class="tarsasag">Wizz Air</td>
-                            <td class="jaratszam">W62325</td>
-                            <td>2B</td>
-                            <td>Felszállt 06:17</td>
-                        </tr>
-                        <tr>
-                            <td>06:10</td>
-                            <td>Tel Aviv TLV</td>
-                            <td class="tarsasag">Wizz Air</td>
-                            <td class="jaratszam">W62325</td>
-                            <td>2B</td>
-                            <td>Felszállt 06:17</td>
-                        </tr>
-                        <tr>
-                            <td>06:10</td>
-                            <td>Tel Aviv TLV</td>
-                            <td class="tarsasag">Wizz Air</td>
-                            <td class="jaratszam">W62325</td>
-                            <td>2B</td>
-                            <td>Felszállt 06:17</td>
-                        </tr>
+                        <?php foreach($requiredDatas as $data): ?>
+                            <tr>
+                                <td><?php echo substr($data["time"], 0,5); ?></td>
+                                <td><?php echo $data["destination"]; ?></td>
+                                <td class="tarsasag"><?php echo $data["company"]; ?></td>
+                                <td class="jaratszam"><?php echo $data["number"]; ?></td>
+                                <td><?php echo $data["terminal"]; ?></td>
+                                <td><?php echo $data["status"]; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -142,60 +100,17 @@
                 <!-- Section: Images -->
                 <div>
                     <div class="row">
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/113.jpg" alt="footerimggroup" class="w-100" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
+                        <?php for($i = 111; $i < 117; ++$i): ?>
+                            <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                                <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+                                    <img src="https://mdbootstrap.com/img/new/fluid/city/<?php echo $i ?>.jpg" alt="footerimggroup" class="w-100" />
+                                    <a href="#!">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/111.jpg" alt="footerimggroup" class="w-100" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/112.jpg" alt="footerimggroup" class="w-100" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/114.jpg" alt="footerimggroup" class="w-100" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/115.jpg" alt="footerimggroup" class="w-100" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                data-ripple-color="light">
-                                <img src="https://mdbootstrap.com/img/new/fluid/city/116.jpg" alt="footerimggroup" class="w-100" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                </a>
-                            </div>
-                        </div>
+                        <?php endfor; ?>
                     </div>
                 </div>
                 <!-- Section: Images -->

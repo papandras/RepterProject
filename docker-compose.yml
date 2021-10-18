@@ -1,0 +1,20 @@
+version: '2'
+services:
+    php:
+        build: php
+        expose:
+            - 9000
+        volumes:
+            - ./RepterProject
+
+    apache2:
+        image: webdevops/apache:latest
+        args:
+            - PHP_SOCKET=php:9000
+        volumes:
+            - ./RepterProject
+        ports:
+            - 80:80
+            - 443:443
+        links:
+            - php
