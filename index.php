@@ -1,5 +1,5 @@
 <?php
-require("request.php");
+require("Datas.php");
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +15,7 @@ require("request.php");
         type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -62,16 +63,17 @@ require("request.php");
 
         <main>
             <div >
-                <ul class="list-group list-group-horizontal" id="tablemenu">
-                    <li class="list-group-item" aria-current="true">Indulás</li>
-                    <li class="list-group-item">Érkezés</li>
-                </ul>
+                <div class="list-group list-group-horizontal" id="tablemenu">
+                    <button class="list-group-item" aria-current="true" onclick="start()">Indulás</button>
+                    <button class="list-group-item" onclick="arrive()">Érkezés</button>
+                </div>
 
-                <table class="table table-hover table-dark table-responsive">
+                <table class="table table-hover table-dark table-responsive" id="dest">
                     <thead>
                         <tr>
                             <th scope="col">Időpont</th>
-                            <th scope="col">Célállomás</th>
+                            <!--<th scope="col">Indulás</th>-->
+                            <!--<th scope="col">Célállomás</th>-->
                             <th scope="col" class="tarsasag">Légitársaság</th>
                             <th scope="col" class="jaratszam">Járatszám</th>
                             <th scope="col">Terminál</th>
@@ -79,16 +81,62 @@ require("request.php");
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($requiredDatas as $data): ?>
-                            <tr>
-                                <td><?php echo substr($data["time"], 0,5); ?></td>
-                                <td><?php echo $data["destination"]; ?></td>
-                                <td class="tarsasag"><?php echo $data["company"]; ?></td>
-                                <td class="jaratszam"><?php echo $data["number"]; ?></td>
-                                <td><?php echo $data["terminal"]; ?></td>
-                                <td><?php echo $data["status"]; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
+                        <?php $call = $dataArray->GetDatas($repterek, true); ?>
+                        <?php if(!is_null($call)):?>
+                            <?php foreach($call as $data): ?>
+                                <?php if($data["destination"] == "Shenzhen"): ?>
+                                    <tr>
+                                        <td><?php echo substr($data["time"], 0,5); ?></td>
+                                        <!--<td><?php echo $data["start"]; ?></td>-->
+                                        <!--<td><?php echo $data["destination"]; ?></td>-->
+                                        <td class="tarsasag"><?php echo $data["company"]; ?></td>
+                                        <td class="jaratszam"><?php echo $data["number"]; ?></td>
+                                        <td><?php echo $data["terminal"]; ?></td>
+                                        <td><?php echo $data["status"]; ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                                <tbody>
+                                    <td>Nincs adat!</td>
+                                </tbody>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+
+                <table class="table table-hover table-dark table-responsive" id="start" style="display: none">
+                    <thead>
+                        <tr>
+                            <th scope="col">Időpont</th>
+                            <!--<th scope="col">Indulás</th>-->
+                            <!--<th scope="col">Célállomás</th>-->
+                            <th scope="col" class="tarsasag">Légitársaság</th>
+                            <th scope="col" class="jaratszam">Járatszám</th>
+                            <th scope="col">Terminál</th>
+                            <th scope="col">Státusz</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $call = $dataArray->GetDatas($repterek, false); ?>
+                        <?php if(!is_null($call)):?>
+                            <?php foreach($call as $data): ?>
+                                <?php if($data["start"] == "Shenzhen"): ?>
+                                    <tr>
+                                        <td><?php echo substr($data["time"], 0,5); ?></td>
+                                        <!--<td><?php echo $data["start"]; ?></td>-->
+                                        <!--<td><?php echo $data["destination"]; ?></td>-->
+                                        <td class="tarsasag"><?php echo $data["company"]; ?></td>
+                                        <td class="jaratszam"><?php echo $data["number"]; ?></td>
+                                        <td><?php echo $data["terminal"]; ?></td>
+                                        <td><?php echo $data["status"]; ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                                <tbody>
+                                    <td>Nincs adat!</td>
+                                </tbody>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
