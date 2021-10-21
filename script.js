@@ -15,12 +15,8 @@ function show(){
     ++counter;
     if(counter%2==1){
         document.getElementById("show").style.display = "";
-
-        var mywindow = window.open("", "", "height: 400px; width: 400px; margin: auto; background-color: white; color: black;");
-        mywindow.document.write("<p>Maps</p>");
     }
     else {
         document.getElementById("show").style.display = "none";
-        mywindow.close();
     }
 }
