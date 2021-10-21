@@ -78,6 +78,7 @@ require("Datas.php");
                             <th scope="col" class="jaratszam">Járatszám</th>
                             <th scope="col">Terminál</th>
                             <th scope="col">Státusz</th>
+                            <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,6 +94,7 @@ require("Datas.php");
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["terminal"]; ?></td>
                                         <td><?php echo $data["status"]; ?></td>
+                                        <td><button onclick="show()">Show on <br>google maps</button></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
@@ -139,6 +141,9 @@ require("Datas.php");
                         <?php endif; ?>
                     </tbody>
                 </table>
+            </div>
+            <div style="height: 400px; width: 400px; margin: auto; background-color: white; color: black; display: none" id="show">
+                <p>Maps</p>
             </div>
         </main>
 
