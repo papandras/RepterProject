@@ -72,8 +72,8 @@ require("Datas.php");
                     <thead>
                         <tr>
                             <th scope="col">Időpont</th>
-                            <!--<th scope="col">Indulás</th>-->
-                            <!--<th scope="col">Célállomás</th>-->
+                            <th scope="col">Indulás</th>
+                            <th scope="col">Célállomás</th>
                             <th scope="col" class="tarsasag">Légitársaság</th>
                             <th scope="col" class="jaratszam">Járatszám</th>
                             <th scope="col">Terminál</th>
@@ -87,8 +87,8 @@ require("Datas.php");
                                 <?php if($data["destination"] == "Shenzhen"): ?>
                                     <tr>
                                         <td><?php echo substr($data["time"], 0,5); ?></td>
-                                        <!--<td><?php echo $data["start"]; ?></td>-->
-                                        <!--<td><?php echo $data["destination"]; ?></td>-->
+                                        <?php echo $data["start"]; ?>
+                                        <?php echo $data["destination"]; ?>
                                         <td class="tarsasag"><?php echo $data["company"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["terminal"]; ?></td>
@@ -108,8 +108,8 @@ require("Datas.php");
                     <thead>
                         <tr>
                             <th scope="col">Időpont</th>
-                            <!--<th scope="col">Indulás</th>-->
-                            <!--<th scope="col">Célállomás</th>-->
+                            <th scope="col">Indulás</th>
+                            <th scope="col">Célállomás</th>
                             <th scope="col" class="tarsasag">Légitársaság</th>
                             <th scope="col" class="jaratszam">Járatszám</th>
                             <th scope="col">Terminál</th>
@@ -123,10 +123,10 @@ require("Datas.php");
                                 <?php if($data["start"] == "Shenzhen"): ?>
                                     <tr>
                                         <td><?php echo substr($data["time"], 0,5); ?></td>
-                                        <!--<td><?php echo $data["start"]; ?></td>-->
-                                        <!--<td><?php echo $data["destination"]; ?></td>-->
+                                        <?php echo $data["start"]; ?>
+                                        ><?php echo $data["destination"]; ?>
                                         <td class="tarsasag"><?php echo $data["company"]; ?></td>
-                                        <td class="jaratszam"><?php echo $data["number"]; ?></td>
+                                        <td class="jaratszam"><span class="popuptext" id="myPopup"><?php echo $data["number"]; ?></span></td>
                                         <td><?php echo $data["terminal"]; ?></td>
                                         <td><?php echo $data["status"]; ?></td>
                                     </tr>
