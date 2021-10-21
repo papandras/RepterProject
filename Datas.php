@@ -15,23 +15,9 @@ class Datas
         elseif($direction == false){
             $dir = "arrival";
         }
-        /*
-            [
-                "time" => "",
-                "airport" => "",
-                "destination" => "",
-                "company" => "",
-                "number" => "",
-                "terminal" => "",
-                "status" => "",
-            ],
-        */
 
         for($i = 0; $i < count($datas); ++$i)
         {
-            //var_dump($datas[$i]);
-            //echo "<br><br>";
-            //if($datas[$i]["$dir"]["airport"] = "Shenzhen"){
                 $helper = substr($datas[$i]["departure"]["scheduled"], 11, 8);
                 $data["time"] = $helper;
                 $data["airport"] = $datas[$i]["departure"]["airport"];
@@ -61,12 +47,8 @@ class Datas
                         break;
                     default: $data["status"] = NULL;
                 }
-                
+
                 $datas[$i] = $data;
-            //}
-            //else{
-                $data = null;
-            //}
         }
         return $datas;
     }
