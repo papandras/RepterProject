@@ -126,7 +126,7 @@ require("Datas.php");
                                         <?php echo $data["start"]; ?>
                                         ><?php echo $data["destination"]; ?>
                                         <td class="tarsasag"><?php echo $data["company"]; ?></td>
-                                        <td class="jaratszam"><span class="popuptext" id="myPopup"><?php echo $data["number"]; ?></span></td>
+                                        <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["terminal"]; ?></td>
                                         <td><?php echo $data["status"]; ?></td>
                                     </tr>
