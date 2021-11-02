@@ -1,0 +1,22 @@
+body{
+    background-color: black;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    color: white;
+}
+
+.list-group-item:nth-child(2n){
+    border: 1px solid white;
+    color: white;
+    background-color: black;
+    width: 100%;
+    text-align: center;
+}
+
+.list-group-item:nth-child(2n+1){
+    border: 1px solid white;
+    color: black;
+    background-color: white;
+    width: 100%;
+    text-align: center;
+}

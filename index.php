@@ -1,29 +1,20 @@
 <?php
 $style = json_decode(file_get_contents("settings.json"), true);
-require("Datas.php");
+require("php/Datas.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="hu">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shenzhen</title>
-    <link rel="shortcut icon"
-        href="https://w7.pngwing.com/pngs/205/97/png-transparent-airplane-icon-a5-takeoff-computer-icons-flight-airplane.png"
-        type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo $style["style"] ?>">
-    <script src="script.js"></script>
-</head>
+<?php
+require("parts/head.php");
+?>
 
 <body>
     <div class="container">
         <header>
             <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <nav class="navbar navbar-expand navbar-light bg-white">
                 <div class="container-fluid" style="position: relative;">
                                 
                     <div class="collapse navbar-collapse" id="navbarExample01">
@@ -34,8 +25,8 @@ require("Datas.php");
                             <li class="nav-item">
                                 <a class="nav-link" href="about.php">Rólunk</a>
                             </li>
-                            <li style="position: absolute; right: 100px">
-                                <form action="style.php" method="POST">
+                            <li style="position: absolute; right: 10%; top: 10px">
+                                <form action="php/style.php" method="POST">
                                     <select name="bgc" onchange="this.form.submit();">
                                         <option value="light.css" name="black.css" <?php if($style["style"]=="light.css"){echo "selected";} ?>>White</option>
                                         <option value="dark.css" name="white.css" <?php if($style["style"]=="dark.css"){echo "selected";} ?>>Black</option>
@@ -49,7 +40,7 @@ require("Datas.php");
             <!-- Navbar -->
 
             <!-- Background image -->
-            <div class="p-5 text-center bg-image" style="
+            <div class="p-5 text-center bg-image img-fluid" style="
                 background-image: url('https://sm.ign.com/t/ign_hu/blogroll/m/microsoft-/microsoft-flight-simulator-releases-alpha-testers-gameplay-s_4nf8.1280.jpg');
                 height: 400px;
                 background-size: cover;
@@ -67,8 +58,8 @@ require("Datas.php");
         </header>
 
         <main>
-            <div >
-                <div class="list-group list-group-horizontal" id="tablemenu">
+            <div>
+                <div class="list-group list-group-horizontal-md" id="tablemenu">
                     <button class="list-group-item" aria-current="true" onclick="start()">Indulás</button>
                     <button class="list-group-item" onclick="arrive()">Érkezés</button>
                 </div>
@@ -145,35 +136,9 @@ require("Datas.php");
             </div>
         </main>
 
-        <footer class="text-center text-white" style="background-color: #caced1;">
-            <!-- Grid container -->
-            <div class="container p-4">
-                <!-- Section: Images -->
-                <div>
-                    <div class="row">
-                        <?php for($i = 111; $i < 117; ++$i): ?>
-                            <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                                <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                    data-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/new/fluid/city/<?php echo $i ?>.jpg" alt="footerimggroup" class="w-100" />
-                                    <a href="#!">
-                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                    </a>
-                                </div>
-                            </div>
-                        <?php endfor; ?>
-                    </div>
-                </div>
-                <!-- Section: Images -->
-            </div>
-            <!-- Grid container -->
-
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                BETA 1.0
-            </div>
-            <!-- Copyright -->
-        </footer>
+        <?php
+            require("parts/footer.php");
+        ?>
     </div>
 </body>
 

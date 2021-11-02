@@ -1,29 +1,21 @@
+<?php
+$style = json_decode(file_get_contents("settings.json"), true);
+?>
+
 <!DOCTYPE html>
 <html lang="hu">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shenzhen Airport</title>
-    <link rel="shortcut icon"
-        href="https://w7.pngwing.com/pngs/205/97/png-transparent-airplane-icon-a5-takeoff-computer-icons-flight-airplane.png"
-        type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
+<?php
+require("parts/head.php");
+?>
 
 <body>
     <div class="container">
         <header>
             <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                        data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
+            <nav class="navbar navbar-expand navbar-light bg-white">
+                <div class="container-fluid" style="position: relative;">
+                                
                     <div class="collapse navbar-collapse" id="navbarExample01">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item active">
@@ -39,7 +31,7 @@
             <!-- Navbar -->
 
             <!-- Background image -->
-            <div class="p-5 text-center bg-image" style="
+            <div class="p-5 text-center bg-image img-fluid" style="
                 background-image: url('https://sm.ign.com/t/ign_hu/blogroll/m/microsoft-/microsoft-flight-simulator-releases-alpha-testers-gameplay-s_4nf8.1280.jpg');
                 height: 400px;
                 background-size: cover;
@@ -47,7 +39,7 @@
                 <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
                     <div class="d-flex justify-content-center align-items-center h-100">
                         <div class="text-white">
-                            <h1 class="mb-3">Budapest Airport</h1>
+                            <h1 class="mb-3">Shenzhen</h1>
                             <h4 class="mb-3">Járatinformációk</h4>
                         </div>
                     </div>
@@ -56,37 +48,11 @@
             <!-- Background image -->
         </header>
 
-        <p>Ezen a weblapon kigyűjtöttük a Budapest Airport járatinformációit</p>
+        <p>Ezen a weblapon kigyűjtöttük a repterekkel kapcsolatos járatinformációit</p>
 
-        <footer class="text-center text-white" style="background-color: #caced1;">
-            <!-- Grid container -->
-            <div class="container p-4">
-                <!-- Section: Images -->
-                <div>
-                    <div class="row">
-                    <?php for($i = 111; $i < 117; ++$i): ?>
-                            <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
-                                <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                    data-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/new/fluid/city/<?php echo $i ?>.jpg" alt="footerimggroup" class="w-100" />
-                                    <a href="#!">
-                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                                    </a>
-                                </div>
-                            </div>
-                        <?php endfor; ?>
-                    </div>
-                </div>
-                <!-- Section: Images -->
-            </div>
-            <!-- Grid container -->
-
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                BETA 1.0
-            </div>
-            <!-- Copyright -->
-        </footer>
+        <?php
+            require("parts/footer.php");
+        ?>
     </div>
 </body>
 
