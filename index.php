@@ -1,4 +1,5 @@
 <?php
+$style = json_decode(file_get_contents("settings.json"), true);
 require("Datas.php");
 ?>
 
@@ -9,12 +10,12 @@ require("Datas.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shenzhen Airport</title>
+    <title>Shenzhen</title>
     <link rel="shortcut icon"
         href="https://w7.pngwing.com/pngs/205/97/png-transparent-airplane-icon-a5-takeoff-computer-icons-flight-airplane.png"
         type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<?php echo $style["style"] ?>">
     <script src="script.js"></script>
 </head>
 
@@ -23,12 +24,8 @@ require("Datas.php");
         <header>
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-white">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                        data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
+                <div class="container-fluid" style="position: relative;">
+                                
                     <div class="collapse navbar-collapse" id="navbarExample01">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item active">
@@ -36,6 +33,14 @@ require("Datas.php");
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about.php">Rólunk</a>
+                            </li>
+                            <li style="position: absolute; right: 100px">
+                                <form action="style.php" method="POST">
+                                    <select name="bgc" onchange="this.form.submit();">
+                                        <option value="light.css" name="black.css" <?php if($style["style"]=="light.css"){echo "selected";} ?>>White</option>
+                                        <option value="dark.css" name="white.css" <?php if($style["style"]=="dark.css"){echo "selected";} ?>>Black</option>
+                                    </select>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -52,7 +57,7 @@ require("Datas.php");
                 <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
                     <div class="d-flex justify-content-center align-items-center h-100">
                         <div class="text-white">
-                            <h1 class="mb-3">Shenzhen Airport</h1>
+                            <h1 class="mb-3">Shenzhen</h1>
                             <h4 class="mb-3">Járatinformációk</h4>
                         </div>
                     </div>
@@ -68,7 +73,7 @@ require("Datas.php");
                     <button class="list-group-item" onclick="arrive()">Érkezés</button>
                 </div>
 
-                <table class="table table-hover table-dark table-responsive" id="dest">
+                <table class="table table-hover table-dark table-responsive" id="dest" style="display: none">
                     <thead>
                         <tr>
                             <th scope="col">Időpont</th>
@@ -76,11 +81,14 @@ require("Datas.php");
                             <th scope="col" class="jaratszam">Járatszám</th>
                             <th scope="col">Terminál</th>
                             <th scope="col">Státusz</th>
-                            <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $call = $dataArray->GetDatas($repterek, true); ?>
+                        <?php $call = $dataArray->GetDatas($repterek, true);
+                        
+                        
+                        
+                        ?>
                         <?php if(!is_null($call)):?>
                             <?php foreach($call as $data): ?>
                                 <?php if($data["destination"] == "Shenzhen"): ?>
@@ -90,11 +98,11 @@ require("Datas.php");
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["terminal"]; ?></td>
                                         <td><?php echo $data["status"]; ?></td>
-                                        <td><button onclick="show()">Show on <br>google maps</button></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-                        <?php else: ?>
+                        <?php endif; ?>
+                        <?php if(is_null($call)):?>
                                 <tbody>
                                     <td>Nincs adat!</td>
                                 </tbody>
@@ -102,7 +110,7 @@ require("Datas.php");
                     </tbody>
                 </table>
 
-                <table class="table table-hover table-dark table-responsive" id="start" style="display: none">
+                <table class="table table-hover table-dark table-responsive" id="start">
                     <thead>
                         <tr>
                             <th scope="col">Időpont</th>
@@ -126,16 +134,14 @@ require("Datas.php");
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-                        <?php else: ?>
+                        <?php endif; ?>
+                        <?php if(is_null($call)):?>
                                 <tbody>
                                     <td>Nincs adat!</td>
                                 </tbody>
                         <?php endif; ?>
                     </tbody>
                 </table>
-            </div>
-            <div style="height: 400px; width: 400px; margin: auto; background-color: white; color: black; display: none" id="show">
-                <p>Maps</p>
             </div>
         </main>
 

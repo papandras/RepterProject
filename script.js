@@ -9,14 +9,3 @@ function arrive(){
     document.getElementById("start").style.display = "none";
     document.getElementById("startt").style.backgroundColor = "";
 }
-let counter = 0;
-function show(){
-    
-    ++counter;
-    if(counter%2==1){
-        document.getElementById("show").style.display = "";
-    }
-    else {
-        document.getElementById("show").style.display = "none";
-    }
-}
