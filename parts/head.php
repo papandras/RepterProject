@@ -7,6 +7,6 @@
         href="https://w7.pngwing.com/pngs/205/97/png-transparent-airplane-icon-a5-takeoff-computer-icons-flight-airplane.png"
         type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="<?php echo "style/".$style["style"] ?>">
+    <link rel="stylesheet" href="style/main.css">
 </head>

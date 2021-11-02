@@ -28,8 +28,8 @@ require("parts/head.php");
                             <li style="position: absolute; right: 10%; top: 10px">
                                 <form action="php/style.php" method="POST">
                                     <select name="bgc" onchange="this.form.submit();">
-                                        <option value="light.css" name="black.css" <?php if($style["style"]=="light.css"){echo "selected";} ?>>White</option>
-                                        <option value="dark.css" name="white.css" <?php if($style["style"]=="dark.css"){echo "selected";} ?>>Black</option>
+                                        <option value="light.css" name="black.css" <?php if($style["style"]=="light.css"){echo "selected";} ?>>Fehér</option>
+                                        <option value="dark.css" name="white.css" <?php if($style["style"]=="dark.css"){echo "selected";} ?>>Fekete</option>
                                     </select>
                                 </form>
                             </li>
