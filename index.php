@@ -97,8 +97,11 @@ require("parts/head.php");
                     <button class="list-group-item" onclick="arrive()">Érkezés</button>
                 </div>
 
-                <table class="table table-hover table-<?php echo $table ?> table-responsive" id="dest" style="display: none">
+                <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="dest" style="display: none">
                     <thead>
+                        <tr>
+                            <td colspan="5" class="text-center">Érkező járatok</td>
+                        </tr>
                         <tr>
                             <th scope="col">Időpont</th>
                             <th scope="col" class="tarsasag">Légitársaság</th>
@@ -148,8 +151,11 @@ require("parts/head.php");
                     </tbody>
                 </table>
 
-                <table class="table table-hover table-<?php echo $table ?> table-responsive" id="start">
+                <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="start">
                     <thead>
+                        <tr>
+                            <td colspan="5" class="text-center">Induló járatok</td>
+                        </tr>
                         <tr>
                             <th scope="col">Időpont</th>
                             <th scope="col" class="tarsasag">Légitársaság</th>

@@ -57,27 +57,35 @@ main div::-webkit-scrollbar-thumb {
 }
 		
 @-webkit-keyframes moving {
-    from {right: 300px;}
-    to {right: 700px;}
+    from {right: 3%;}
+    to {right: 75%;}
 }
 
 @keyframes moving {
-    from {left: 300px;}
-    to {left: 700px;}
+    from {left: 3%;}
+    to {left: 75%;}
 }
 
 @-webkit-keyframes back {
-    from {right: 700px;}
-    to {right: 300px;}
+    from {right: 75%;}
+    to {right: 3%;}
 }
 
 @keyframes back {
-    from {left: 700px;}
-    to {left: 300px;}
+    from {left: 75%;}
+    to {left: 3%;}
 }
 
 tr:nth-child(2n+1){
     background-color: #fff;
+}
+
+.hover:hover{
+    display: none;
+}
+
+th,td{
+    width: 20%;
 }
 
 @media (max-width: 1200px) {
