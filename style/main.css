@@ -1,7 +1,27 @@
+#plane{
+    height: 174px;
+    width: 300px;
+    background-image: url("../img/bg_b.png");
+    position: absolute;
+    top: 250px;
+    -webkit-animation: moving 15s infinite;
+    animation: moving 15s infinite;
+}
+
+#plane2{
+    height: 174px;
+    width: 300px;
+    background-image: url("../img/bg_b.png");
+    position: absolute;
+    top: 250px;
+    -webkit-animation: back 15s infinite;
+    animation: back 15s infinite;
+}
+
 body{
     width: 70%;
     margin: auto;
-    padding: 1rem;
+    position: relative;
 }
 
 body::-webkit-scrollbar {
@@ -37,13 +57,23 @@ main div::-webkit-scrollbar-thumb {
 }
 		
 @-webkit-keyframes moving {
-    from {right: 200px;}
-    to {right: 400px;}
+    from {right: 300px;}
+    to {right: 700px;}
 }
 
 @keyframes moving {
-    from {left: 200px;}
-    to {left: 400px;}
+    from {left: 300px;}
+    to {left: 700px;}
+}
+
+@-webkit-keyframes back {
+    from {right: 700px;}
+    to {right: 300px;}
+}
+
+@keyframes back {
+    from {left: 700px;}
+    to {left: 300px;}
 }
 
 tr:nth-child(2n+1){
@@ -82,5 +112,8 @@ tr:nth-child(2n+1){
     }
     #tablemenu>button{
         height: 200%;
+    }
+    #plane,#plane2{
+        display: none;
     }
 }

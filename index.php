@@ -15,6 +15,8 @@ require("parts/head.php");
 ?>
 
 <body>
+    <div class="plane" id="plane"></div>
+    <div class="plane" id="plane2"></div>
     <div class="container">
         <header>
             <!-- Navbar -->

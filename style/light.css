@@ -5,6 +5,10 @@ body{
     color: black;
 }
 
+body .container{
+    background-color: white;
+}
+
 .list-group-item:nth-child(2n){
     border: 1px solid black;
     color: black;

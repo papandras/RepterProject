@@ -15,3 +15,7 @@ function()
     console.log(1);
     $("#load").load("./parts/footer.php").fadeIn("Slow");
 },10000)
+
+if(document.getElementsByClassName["plane"][0].positionX = 700){
+    alert();
+}
