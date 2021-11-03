@@ -6,19 +6,14 @@ $repterek = json_decode(file_get_contents("data.json"), true);
 
 class Datas
 {
-    public function GetDatas($datas, $direction)
+    public function GetDatas($datas)
     {   
-        if($direction == true){
-            $dir = "departure";
-        }
-        elseif($direction == false){
-            $dir = "arrival";
-        }
 
         for($i = 0; $i < count($datas); ++$i)
         {
                 $helper = substr($datas[$i]["departure"]["scheduled"], 11, 8);
                 $data["time"] = $helper;
+                $data["time"] = date(substr($data["time"], 0,5));
                 $data["start"] = $datas[$i]["departure"]["airport"];
                 $data["destination"] = $datas[$i]["arrival"]["airport"];
                 $data["company"] = $datas[$i]["airline"]["name"];

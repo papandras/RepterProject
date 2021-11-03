@@ -1,6 +1,16 @@
 <?php
+/**
+ * A request.php-ban letöltött adatokat olvassa be.
+ */
 $style = json_decode(file_get_contents("settings.json"), true);
+/**
+ * Datas osztály meghívása, 
+ * $dataArray a példánya
+ */
 require("php/Datas.php");
+/**
+ * Ez a stíluslapok közötti váltást teszi lehetővé
+ */
 $table = "light";
 if($style["style"]=="light.css"){
     $table = "dark";
@@ -15,6 +25,7 @@ require("parts/head.php");
 ?>
 
 <body>
+    <!-- A mozgó repülők ezekben vannak (main.css) -->
     <div class="plane" id="plane"></div>
     <div class="plane" id="plane2"></div>
     <div class="container">
@@ -32,6 +43,17 @@ require("parts/head.php");
                                 <a class="nav-link" href="about.php">Rólunk</a>
                             </li>
                             <li style="position: absolute; right: 10%; top: 10px">
+                                <?php
+                                /**
+                                 * Ebben a formban cserélődnek a stíluslapok
+                                 * onchange="this.form.submit() --> Submit gombként funkcionál!
+                                 * 
+                                 * if($style["style"]=="light.css" --> echo "selected"
+                                 * Az aktuálisan beállított téma kerül kijelölésre
+                                 * 
+                                 * style.php-ban lesz feldolgozva
+                                 */
+                                ?>
                                 <form action="php/style.php" method="POST">
                                     <select name="bgc" onchange="this.form.submit();">
                                         <option value="light.css" name="black.css" <?php if($style["style"]=="light.css"){echo "selected";} ?>>Fehér</option>
@@ -65,6 +87,11 @@ require("parts/head.php");
 
         <main>
             <div>
+                <?php
+                /**
+                 * A két gomb jeleníti meg az érkező / induló járatokat
+                 */
+                ?>
                 <div class="list-group list-group-horizontal-md" id="tablemenu">
                     <button class="list-group-item" aria-current="true" onclick="start()">Indulás</button>
                     <button class="list-group-item" onclick="arrive()">Érkezés</button>
@@ -81,16 +108,25 @@ require("parts/head.php");
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $call = $dataArray->GetDatas($repterek, true);
-                        
-                        
-                        
+                        <?php
+                            $call = $dataArray->GetDatas($repterek);
+                            $counter = 0;
                         ?>
                         <?php if(!is_null($call)):?>
                             <?php foreach($call as $data): ?>
-                                <?php if($data["destination"] == "Shenzhen"): ?>
+                                <?php if($data["destination"] == "Shenzhen" && (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480): ?>
+                                    <?php
+                                    /**
+                                    * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480
+                                    * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg.
+                                    *
+                                    * $data["destination"] == "Shenzhen"
+                                    * Csak a Shenzhen reptér adatait jeleníti meg
+                                    */
+                                    ++$counter;
+                                    ?>
                                     <tr>
-                                        <td><?php echo substr($data["time"], 0,5); ?></td>
+                                        <td><?php echo $data["time"]; ?></td>
                                         <td class="tarsasag"><?php echo $data["company"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["terminal"]; ?></td>
@@ -99,9 +135,14 @@ require("parts/head.php");
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
-                        <?php if(is_null($call)):?>
+                        <?php if($counter == 0):?>
+                                <?php
+                                /**
+                                 * Ha nics éppen repülő, kiírjuk hogy nincsen.
+                                 */
+                                ?>
                                 <tbody>
-                                    <td>Nincs adat!</td>
+                                    <td colspan="5" class="text-center"><strong>Nincs érkező repülőgép!</strong></td>
                                 </tbody>
                         <?php endif; ?>
                     </tbody>
@@ -118,10 +159,23 @@ require("parts/head.php");
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $call = $dataArray->GetDatas($repterek, false); ?>
+                        <?php
+                        $call = $dataArray->GetDatas($repterek); 
+                        $counter = 0;
+                        ?>
                         <?php if(!is_null($call)):?>
                             <?php foreach($call as $data): ?>
-                                <?php if($data["start"] == "Shenzhen"): ?>
+                                <?php if($data["start"] == "Shenzhen" && (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480): ?>
+                                    <?php
+                                    /**
+                                    * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480
+                                    * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg.
+                                    *
+                                    * $data["destination"] == "Shenzhen"
+                                    * Csak a Shenzhen reptér adatait jeleníti meg
+                                    */
+                                    ++$counter;
+                                    ?>
                                     <tr>
                                         <td><?php echo substr($data["time"], 0,5); ?></td>
                                         <td class="tarsasag"><?php echo $data["company"]; ?></td>
@@ -132,9 +186,14 @@ require("parts/head.php");
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
-                        <?php if(is_null($call)):?>
+                        <?php if($counter == 0):?>
+                                <?php
+                                /**
+                                 * Ha nics éppen repülő, kiírjuk hogy nincsen.
+                                 */
+                                ?>
                                 <tbody>
-                                    <td>Nincs adat!</td>
+                                    <td colspan="5" class="text-center"><strong>Nincs induló repülőgép!</strong></td>
                                 </tbody>
                         <?php endif; ?>
                     </tbody>
@@ -142,6 +201,12 @@ require("parts/head.php");
             </div>
         </main>
                     
+        <?php
+            /**
+             * A footer.php-t hívja meg a script.js-ben használt setInterval segítségével
+             * 10 másodpercenként frissül.
+             */
+        ?>
         <div id="load">
             <?php
                 require("parts/footer.php");

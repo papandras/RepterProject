@@ -21,7 +21,7 @@ $arr = [111,112,113,114,115,116,117];
                             array_splice($arr, $rand,1);
                             echo $kivagott;
 
-                            ?>.jpg" alt="footerimggroup" class="w-100 img-fluid" />
+                            ?>.jpg" alt="footerimggroup" class="w-100 img-fluid rounded" />
                         </div>
                     </div>
                 <?php endfor; ?>

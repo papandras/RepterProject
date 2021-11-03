@@ -8,14 +8,9 @@ function arrive(){
     document.getElementById("start").style.display = "none";
 }
 
-var x = "<?php require('parts/footer.php') ?>";
 var autoLoad = setInterval(
 function()
 {
     console.log(1);
     $("#load").load("./parts/footer.php").fadeIn("Slow");
 },10000)
-
-if(document.getElementsByClassName["plane"][0].positionX = 700){
-    alert();
-}
