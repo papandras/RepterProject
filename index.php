@@ -1,6 +1,10 @@
 <?php
 $style = json_decode(file_get_contents("settings.json"), true);
 require("php/Datas.php");
+$table = "light";
+if($style["style"]=="light.css"){
+    $table = "dark";
+}
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +68,7 @@ require("parts/head.php");
                     <button class="list-group-item" onclick="arrive()">Érkezés</button>
                 </div>
 
-                <table class="table table-hover table-dark table-responsive" id="dest" style="display: none">
+                <table class="table table-hover table-<?php echo $table ?> table-responsive" id="dest" style="display: none">
                     <thead>
                         <tr>
                             <th scope="col">Időpont</th>
@@ -101,7 +105,7 @@ require("parts/head.php");
                     </tbody>
                 </table>
 
-                <table class="table table-hover table-dark table-responsive" id="start">
+                <table class="table table-hover table-<?php echo $table ?> table-responsive" id="start">
                     <thead>
                         <tr>
                             <th scope="col">Időpont</th>
@@ -135,10 +139,12 @@ require("parts/head.php");
                 </table>
             </div>
         </main>
-
-        <?php
-            require("parts/footer.php");
-        ?>
+                    
+        <div id="load">
+            <?php
+                require("parts/footer.php");
+            ?>
+        </div>
     </div>
 </body>
 

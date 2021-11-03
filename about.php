@@ -48,11 +48,13 @@ require("parts/head.php");
             <!-- Background image -->
         </header>
 
-        <p>Ezen a weblapon kigyűjtöttük a repterekkel kapcsolatos járatinformációit</p>
+        <p id="movetxt">Ezen a weblapon kigyűjtöttük a repterekkel kapcsolatos járatinformációkat</p>
 
-        <?php
-            require("parts/footer.php");
-        ?>
+        <div id="load">
+            <?php
+                require("parts/footer.php");
+            ?>
+        </div>
     </div>
 </body>
 

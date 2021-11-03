@@ -30,6 +30,22 @@ main div::-webkit-scrollbar-thumb {
     box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
 }
 
+#movetxt {
+    position: relative;
+    -webkit-animation: moving 5s infinite;
+    animation: moving 5s infinite;
+}
+		
+@-webkit-keyframes moving {
+    from {right: 200px;}
+    to {right: 400px;}
+}
+
+@keyframes moving {
+    from {left: 200px;}
+    to {left: 400px;}
+}
+
 tr:nth-child(2n+1){
     background-color: #fff;
 }
