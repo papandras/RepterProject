@@ -53,8 +53,20 @@ require("parts/head.php");
             <!-- Background image -->
         </header>
 
-        <p id="movetxt">Ezen a weblapon kigyűjtöttük a repterekkel kapcsolatos járatinformációkat.</p>
+        <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="dest" style="display: none">
+            <thead>
+                <tr>
+                    <th scope="col">Időpont</th>
+                    <th scope="col" class="tarsasag">Légitársaság</th>
+                    <th scope="col" class="jaratszam">Járatszám</th>
+                    <th scope="col">Terminál</th>
+                    <th scope="col">Státusz</th>
+                </tr>
+            </thead>
+            <tbody>
 
+            </tbody>
+        </table>
         <div id="load">
             <?php
                 require("parts/footer.php");
