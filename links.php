@@ -5,15 +5,8 @@ $linkek = [
     ['Liszt Ferenc Nemzetközi Repülőtér', 'https://www.lisztferencrepuloter.com'];
     ['Budapest Nemzetközi Repülőtér', 'https://www.bud.hu'];
     ['Bucharest Henri Coandă', 'https://www.bucharestairports.ro/en/'];
-    ['', ''];
-    ['', ''];
-    ['', ''];
-    ['', ''];
-    ['', ''];
-    ['', ''];
-    ['', ''];
-    //
-    ['', ''];
+    ['Vienna International Airport', 'https://www.viennaairport.com'];
+    ['Kosice International Airport', 'https://www.airportkosice.sk'];
 ]
 ?>
 
