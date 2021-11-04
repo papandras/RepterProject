@@ -1,5 +1,20 @@
 <?php
 $style = json_decode(file_get_contents("settings.json"), true);
+
+$linkek = [
+    ['Liszt Ferenc Nemzetközi Repülőtér', 'https://www.lisztferencrepuloter.com'];
+    ['Budapest Nemzetközi Repülőtér', 'https://www.bud.hu'];
+    ['Bucharest Henri Coandă', 'https://www.bucharestairports.ro/en/'];
+    ['', ''];
+    ['', ''];
+    ['', ''];
+    ['', ''];
+    ['', ''];
+    ['', ''];
+    ['', ''];
+    //
+    ['', ''];
+]
 ?>
 
 <!DOCTYPE html>
@@ -53,14 +68,11 @@ require("parts/head.php");
             <!-- Background image -->
         </header>
 
-        <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="dest" style="display: none">
+        <table class="table table-hover table-responsive text-center table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Időpont</th>
-                    <th scope="col" class="tarsasag">Légitársaság</th>
-                    <th scope="col" class="jaratszam">Járatszám</th>
-                    <th scope="col">Terminál</th>
-                    <th scope="col">Státusz</th>
+                    <th scope="col">Repterek</th>
+                    <th scope="col">Hivatkozások</th>
                 </tr>
             </thead>
             <tbody>
