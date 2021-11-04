@@ -90,10 +90,6 @@ tr:nth-child(2n+1){
     background-color: #fff;
 }
 
-.hover:hover{
-    display: none;
-}
-
 th,td{
     width: 20%;
 }
