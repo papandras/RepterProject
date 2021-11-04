@@ -134,4 +134,11 @@ th,td{
     #plane,#plane2{
         display: none;
     }
+    #movetxt {
+        position: relative;
+        -webkit-animation: none;
+        animation: none;
+        margin: 10px;
+        text-align: center;
+    }
 }

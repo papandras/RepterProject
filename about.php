@@ -50,7 +50,7 @@ require("parts/head.php");
             <!-- Background image -->
         </header>
 
-        <p id="movetxt">Ezen a weblapon kigyűjtöttük a repterekkel kapcsolatos járatinformációkat</p>
+        <p id="movetxt">Ezen a weblapon kigyűjtöttük a repterekkel kapcsolatos járatinformációkat.</p>
 
         <div id="load">
             <?php

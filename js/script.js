@@ -11,6 +11,5 @@ function arrive(){
 var autoLoad = setInterval(
 function()
 {
-    console.log(1);
     $("#load").load("./parts/footer.php").fadeIn("Slow");
 },10000)
