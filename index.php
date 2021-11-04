@@ -42,6 +42,9 @@ require("parts/head.php");
                             <li class="nav-item">
                                 <a class="nav-link" href="about.php">Rólunk</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="links.php">Hivatkozások</a>
+                            </li>
                             <li style="position: absolute; right: 10%; top: 10px">
                                 <?php
                                 /**
