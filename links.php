@@ -2,11 +2,11 @@
 $style = json_decode(file_get_contents("settings.json"), true);
 
 $linkek = [
-    ['Liszt Ferenc Nemzetközi Repülőtér', 'https://www.lisztferencrepuloter.com'];
-    ['Budapest Nemzetközi Repülőtér', 'https://www.bud.hu'];
-    ['Bucharest Henri Coandă', 'https://www.bucharestairports.ro/en/'];
-    ['Vienna International Airport', 'https://www.viennaairport.com'];
-    ['Kosice International Airport', 'https://www.airportkosice.sk'];
+    ['Liszt Ferenc Nemzetközi Repülőtér', 'https://www.lisztferencrepuloter.com'],
+    ['Budapest Nemzetközi Repülőtér', 'https://www.bud.hu'],
+    ['Bucharest Henri Coandă', 'https://www.bucharestairports.ro/en/'],
+    ['Vienna International Airport', 'https://www.viennaairport.com'],
+    ['Kosice International Airport', 'https://www.airportkosice.sk'],
 ]
 ?>
 
@@ -69,11 +69,17 @@ require("parts/head.php");
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                    xfd
-                </td>
-            </tr>
+            <?php
+            foreach ($linkek as $all) { ?>
+                <tr>
+                    <td>
+                        <p><?= $all[0] ?></p>
+                    </td>
+                    <td>
+                        <a href="<?= $all[1]?>" target="_blank">###</a>
+                    </td>
+                </tr>
+            <?php } ?>
             </tbody>
         </table>
         <div id="load">
