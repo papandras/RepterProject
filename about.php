@@ -58,6 +58,8 @@ require("parts/head.php");
             ?>
         </div>
     </div>
+    <p>További információkért látogass el az alábbi weboldalakra!</p><br>
+    <p>A reptér weboldala:</p> <a href=""></a>
 </body>
 
 </html>
