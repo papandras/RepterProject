@@ -1,7 +1,7 @@
 #plane{
     height: 174px;
     width: 300px;
-    background-image: url("../img/bg_b.png");
+    background-image: url("../img/bg_bb.png");
     position: absolute;
     top: 250px;
     -webkit-animation: moving 15s infinite;
@@ -52,8 +52,18 @@ main div::-webkit-scrollbar-thumb {
 
 #movetxt {
     position: relative;
-    -webkit-animation: moving 5s infinite;
-    animation: moving 5s infinite;
+    -webkit-animation: txt 5s infinite;
+    animation: txt 5s infinite;
+}
+
+@-webkit-keyframes txt {
+    from {right: 5%;}
+    to {right: 60%;}
+}
+
+@keyframes txt {
+    from {left: 5%;}
+    to {left: 60%;}
 }
 		
 @-webkit-keyframes moving {
