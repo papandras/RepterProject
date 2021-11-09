@@ -1,5 +1,5 @@
 <?php
-$style = json_decode(file_get_contents("settings.json"), true);
+require("php/Datas.php");
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ require("parts/head.php");
                 <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
                     <div class="d-flex justify-content-center align-items-center h-100">
                         <div class="text-white">
-                            <h1 class="mb-3">Shenzhen</h1>
+                            <h1 class="mb-3"><?php echo $kivalasztottRepter ?></h1>
                             <h4 class="mb-3">Járatinformációk</h4>
                         </div>
                     </div>
