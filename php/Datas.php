@@ -6,6 +6,20 @@ $repterek = json_decode(file_get_contents("data.json"), true);
 
 class Datas
 {
+    private $osszesRepter = [];
+
+    public function GetAirports($data)
+    {
+        for($i = 0; $i < count($data); ++$i)
+        {
+            if($data[$i]["airline"]["name"] != null){
+                $osszesRepter[$i] = $data[$i]["departure"]["airport"];
+            }
+        }
+        
+        return array_unique($osszesRepter);
+    }
+
     public function GetDatas($datas)
     {   
         
@@ -41,10 +55,27 @@ class Datas
                     default: $data["status"] = NULL;
                 }
 
-                $datas[$i] = $data;
+                if((strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480)
+                {
+                    $datas[$i] = $data;
+                }
         }
         return $datas;
     }
 }
 
 $dataArray = new Datas();
+
+$x = new Datas();
+
+//$kivalasztottRepter = $_POST["repter"] ?? null;
+//$kivalasztottRepter == "" ? $kivalasztottRepter = "Shenzhen" : $kivalasztottRepter = $_POST["repter"];
+
+$kivalasztottRepter = json_decode(file_get_contents("settings.json"), true)["airport"];
+
+if($kivalasztottRepter == "")
+{
+    $kivalasztottRepter = "Shenzhen";
+}
+
+$style = json_decode(file_get_contents("settings.json"), true);

@@ -15,6 +15,7 @@ $table = "light";
 if($style["style"]=="light.css"){
     $table = "dark";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +46,21 @@ require("parts/head.php");
                             <li class="nav-item">
                                 <a class="nav-link" href="links.php">Hivatkozások</a>
                             </li>
-                            <li style="position: absolute; right: 10%; top: 10px">
+                            <li style="position: absolute; right: 10%; width: 100%">
+                                <form action="php/airport.php" method="post">
+                                    <!--   <label style="color: black; position: absolute; right: 380px; top: 5px;">Válassz repteret:</label>     -->
+                                    <select class="form-control" style="position: absolute; right: 100px;  top: 0px; width: 20%;" name="repter" onchange="this.form.submit();">
+                                        <option value="">Válassz repteret</option>
+                                        <?php foreach($x->GetAirports($repterek) as $repter): ?>
+                                            <?php if($repter != null): ?>
+                                                <option name="<?php echo $repter; ?>" <?php if($kivalasztottRepter==$repter){echo "selected";} ?>><?php echo $repter ?></option>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <!-- <input type="submit" style="position: absolute; right: 10px; top: 0px;" class="btn btn-success" value="Mutasd"> -->
+                                </form>
+                            </li>
+                            <li style="position: absolute; right: 10%;">
                                 <?php
                                 /**
                                  * Ebben a formban cserélődnek a stíluslapok
@@ -58,11 +73,14 @@ require("parts/head.php");
                                  */
                                 ?>
                                 <form action="php/style.php" method="POST">
-                                    <select name="bgc" onchange="this.form.submit();">
+                                    <select class="form-control" name="bgc" onchange="this.form.submit();">
                                         <option value="light.css" name="black.css" <?php if($style["style"]=="light.css"){echo "selected";} ?>>Fehér</option>
                                         <option value="dark.css" name="white.css" <?php if($style["style"]=="dark.css"){echo "selected";} ?>>Fekete</option>
                                     </select>
                                 </form>
+                            </li>
+                            <li style="position: absolute; right: 8%;">
+                                <button class="btn btn-success" style=" position: absolute; top: 0px;" onclick="refresh()"><img src="./img/refresh.png" height="30px"></button>
                             </li>
                         </ul>
                     </div>
@@ -79,7 +97,7 @@ require("parts/head.php");
                 <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
                     <div class="d-flex justify-content-center align-items-center h-100">
                         <div class="text-white">
-                            <h1 class="mb-3">Shenzhen</h1>
+                            <h1 class="mb-3"><?php echo $kivalasztottRepter ?></h1>
                             <h4 class="mb-3">Járatinformációk</h4>
                         </div>
                     </div>
@@ -120,7 +138,7 @@ require("parts/head.php");
                         ?>
                         <?php if(!is_null($call)):?>
                             <?php foreach($call as $data): ?>
-                                <?php if($data["destination"] == "Shenzhen" && (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480): ?>
+                                <?php if(isset($data["destination"]) && $data["destination"] == $kivalasztottRepter /*&& (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480*/):?>
                                     <?php
                                     /**
                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480
@@ -174,7 +192,7 @@ require("parts/head.php");
                         ?>
                         <?php if(!is_null($call)):?>
                             <?php foreach($call as $data): ?>
-                                <?php if($data["start"] == "Shenzhen" && (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480): ?>
+                                <?php if(isset($data["start"]) && $data["start"] == $kivalasztottRepter /*&& (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480*/): ?>
                                     <?php
                                     /**
                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480
