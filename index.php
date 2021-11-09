@@ -135,7 +135,7 @@ require("parts/head.php");
                         ?>
                         <?php if(!is_null($call)):?>
                             <?php foreach($call as $data): ?>
-                                <?php if($data["destination"] == $kivalasztottRepter && (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480): ?>
+                                <?php if(isset($data["destination"]) && $data["destination"] == $kivalasztottRepter /*&& (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480*/):?>
                                     <?php
                                     /**
                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480
@@ -189,7 +189,7 @@ require("parts/head.php");
                         ?>
                         <?php if(!is_null($call)):?>
                             <?php foreach($call as $data): ?>
-                                <?php if($data["start"] == $kivalasztottRepter && (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480): ?>
+                                <?php if(isset($data["start"]) && $data["start"] == $kivalasztottRepter /*&& (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480*/): ?>
                                     <?php
                                     /**
                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480

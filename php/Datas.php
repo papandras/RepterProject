@@ -55,7 +55,10 @@ class Datas
                     default: $data["status"] = NULL;
                 }
 
-                $datas[$i] = $data;
+                if((strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480)
+                {
+                    $datas[$i] = $data;
+                }
         }
         return $datas;
     }
