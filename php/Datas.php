@@ -8,7 +8,7 @@ class Datas
 {
     public function GetDatas($datas)
     {   
-
+        
         for($i = 0; $i < count($datas); ++$i)
         {
                 $helper = substr($datas[$i]["departure"]["scheduled"], 11, 8);
