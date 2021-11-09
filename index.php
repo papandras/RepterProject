@@ -79,6 +79,9 @@ require("parts/head.php");
                                     </select>
                                 </form>
                             </li>
+                            <li style="position: absolute; right: 8%;">
+                                <button class="btn btn-success" style=" position: absolute; top: 0px;" onclick="refresh()"><img src="./img/refresh.png" height="30px"></button>
+                            </li>
                         </ul>
                     </div>
                 </div>
