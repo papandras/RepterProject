@@ -94,7 +94,7 @@ require("parts/head.php");
                             <th colspan="2">A felhasznált légitársaságok honlapjai</th>
                         </tr>
                         <tr>
-                            <th scope="col">Repterek</th>
+                            <th scope="col">Légitársaság</th>
                             <th scope="col">Honlap</th>
                         </tr>
                     </thead>
