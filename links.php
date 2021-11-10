@@ -1,8 +1,6 @@
 <?php
 require("php/Datas.php");
 
-
-
 $linkek = [
     ['Liszt Ferenc Nemzetközi Repülőtér', 'https://www.lisztferencrepuloter.com'],
     ['Budapest Nemzetközi Repülőtér', 'https://www.bud.hu'],

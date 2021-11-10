@@ -6,11 +6,10 @@ $repterek = json_decode(file_get_contents("data.json"), true);
 
 class Datas
 {
-    private $osszesRepter = [];
-    private $airlines = [];
 
     public function GetAirports($data)
     {
+        $osszesRepter = [];
         for($i = 0; $i < count($data); ++$i)
         {
             //round(abs(strtotime($data["time"]) - strtotime(date('H:i'))) / 60) < 480
@@ -20,10 +19,10 @@ class Datas
             //}
 
             $time = date(substr(substr($data[$i]["departure"]["scheduled"], 11, 8), 0,5));
-            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) < 480 && strtotime(date('H:i')) <= strtotime($time))
-                {
-                    $osszesRepter[$i] = $data[$i]["departure"]["airport"];
-                }
+            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) < 480 && strtotime($time) > strtotime(date('H:i')))
+            {
+                $osszesRepter[$i] = $data[$i]["departure"]["airport"];
+            }
         }
         
         return array_unique($osszesRepter);
@@ -31,6 +30,7 @@ class Datas
 
     public function GetAirlines($data)
     {
+        $airlines = [];
         for($i = 0; $i < count($data); ++$i)
         {
             $airlines[$i] = $data[$i]["airline"]["name"];
@@ -65,13 +65,13 @@ class Datas
                             $data["status"] = "Leszállt";
                             break;
                         case "scheduled":
-                            $data["cancelled"] = "Törölve";
+                            $data["status"] = "Törölve";
                             break;
                         case "incident":
-                            $data["cancelled"] = "Incidens";
+                            $data["status"] = "Incidens";
                             break;
                         case "data":
-                            $data["diverted"] = "Elterelt";
+                            $data["status"] = "Elterelt";
                             break;
                         default: $data["status"] = NULL;
                     }
