@@ -15,7 +15,6 @@ $table = "light";
 if($style["style"]=="light.css"){
     $table = "dark";
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +79,7 @@ require("parts/head.php");
                                 </form>
                             </li>
                             <li style="position: absolute; right: 8%;">
-                                <button class="btn btn-success" style=" position: absolute; top: 0px;" onclick="refresh()"><img src="./img/refresh.png" height="30px"></button>
+                                <button class="btn" style="position: absolute; top: 0px;" onclick="refresh()"><img src="./img/refresh.png" height="30px" title="Adatok legutóbb frissítve: <?php echo date ("Y F d H:i:s.", filemtime("data.json")) ?>"></button>
                             </li>
                         </ul>
                     </div>
@@ -141,8 +140,8 @@ require("parts/head.php");
                                 <?php if(isset($data["destination"]) && $data["destination"] == $kivalasztottRepter /*&& (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480*/):?>
                                     <?php
                                     /**
-                                    * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480
-                                    * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg.
+                                    * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
+                                    * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg. --> uptade(pár nappal később): valamiért nem jó, kerestem másik megoldást
                                     *
                                     * $data["destination"] == "Shenzhen"
                                     * Csak a Shenzhen reptér adatait jeleníti meg

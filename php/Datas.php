@@ -12,9 +12,17 @@ class Datas
     {
         for($i = 0; $i < count($data); ++$i)
         {
-            if($data[$i]["airline"]["name"] != null){
-                $osszesRepter[$i] = $data[$i]["departure"]["airport"];
-            }
+            //round(abs(strtotime($data["time"]) - strtotime(date('H:i'))) / 60) < 480
+            //$time = round(abs(strtotime(date(substr(substr($data[$i]["departure"]["scheduled"], 11, 8), 0,5))) - strtotime(date('H:i'))) / 60);
+            //if($data[$i]["airline"]["name"] != null){
+            //    $osszesRepter[$i] = $data[$i]["departure"]["airport"];
+            //}
+
+            $time = date(substr(substr($data[$i]["departure"]["scheduled"], 11, 8), 0,5));
+            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) < 480)
+                {
+                    $osszesRepter[$i] = $data[$i]["departure"]["airport"];
+                }
         }
         
         return array_unique($osszesRepter);
@@ -22,46 +30,47 @@ class Datas
 
     public function GetDatas($datas)
     {   
-        
         for($i = 0; $i < count($datas); ++$i)
         {
-                $helper = substr($datas[$i]["departure"]["scheduled"], 11, 8);
-                $data["time"] = $helper;
-                $data["time"] = date(substr($data["time"], 0,5));
-                $data["start"] = $datas[$i]["departure"]["airport"];
-                $data["destination"] = $datas[$i]["arrival"]["airport"];
-                $data["company"] = $datas[$i]["airline"]["name"];
-                $data["number"] = $datas[$i]["flight"]["iata"];
-                $data["terminal"] = $datas[$i]["departure"]["terminal"];
-                switch($datas[$i]["flight_status"]){
-                    case "scheduled":
-                        $data["status"] = "Ütemezett";
-                        break;
-                    case "active":
-                        $data["status"] = "Aktív";
-                        break;
-                    case "landed":
-                        $data["status"] = "Leszállt";
-                        break;
-                    case "scheduled":
-                        $data["cancelled"] = "Törölve";
-                        break;
-                    case "incident":
-                        $data["cancelled"] = "Incidens";
-                        break;
-                    case "data":
-                        $data["diverted"] = "Elterelt";
-                        break;
-                    default: $data["status"] = NULL;
+                $data["time"] = date(substr(substr($datas[$i]["departure"]["scheduled"], 11, 8), 0,5));
+                if(round(abs(strtotime($data["time"]) - strtotime(date('H:i'))) / 60) < 480)
+                {
+                    //$osszesRepter[$i] = $datas[$i]["departure"]["airport"];
+
+                    $data["start"] = $datas[$i]["departure"]["airport"];
+                    $data["destination"] = $datas[$i]["arrival"]["airport"];
+                    $data["company"] = $datas[$i]["airline"]["name"];
+                    $data["number"] = $datas[$i]["flight"]["iata"];
+                    $data["terminal"] = $datas[$i]["departure"]["terminal"];
+                    switch($datas[$i]["flight_status"]){
+                        case "scheduled":
+                            $data["status"] = "Ütemezett";
+                            break;
+                        case "active":
+                            $data["status"] = "Aktív";
+                            break;
+                        case "landed":
+                            $data["status"] = "Leszállt";
+                            break;
+                        case "scheduled":
+                            $data["cancelled"] = "Törölve";
+                            break;
+                        case "incident":
+                            $data["cancelled"] = "Incidens";
+                            break;
+                        case "data":
+                            $data["diverted"] = "Elterelt";
+                            break;
+                        default: $data["status"] = NULL;
+                    }
                 }
 
-                if((strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480)
-                {
-                    $datas[$i] = $data;
-                }
+                $datas[$i] = $data;
         }
         return $datas;
     }
+
+    
 }
 
 $dataArray = new Datas();
