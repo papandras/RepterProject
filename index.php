@@ -12,8 +12,6 @@ require("php/Datas.php");
  * Ez a stíluslapok közötti váltást teszi lehetővé
  */
 
- var_dump($x->GetAirports($repterek));
-
 ?>
 
 <!DOCTYPE html>

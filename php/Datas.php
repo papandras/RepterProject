@@ -24,6 +24,10 @@ class Datas
                 $osszesRepter[$i] = $data[$i]["departure"]["airport"];
             }
         }
+
+        if($osszesRepter==null){
+            $osszesRepter = ["Jelenleg egyik reptérről sem indul járat 8 órán belül!"];
+        }
         
         return array_unique($osszesRepter);
     }
