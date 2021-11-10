@@ -7,6 +7,7 @@ $repterek = json_decode(file_get_contents("data.json"), true);
 class Datas
 {
     private $osszesRepter = [];
+    private $airlines = [];
 
     public function GetAirports($data)
     {
@@ -19,7 +20,7 @@ class Datas
             //}
 
             $time = date(substr(substr($data[$i]["departure"]["scheduled"], 11, 8), 0,5));
-            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) < 480)
+            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) < 480 && strtotime(date('H:i')) <= strtotime($time))
                 {
                     $osszesRepter[$i] = $data[$i]["departure"]["airport"];
                 }
@@ -28,14 +29,25 @@ class Datas
         return array_unique($osszesRepter);
     }
 
+    public function GetAirlines($data)
+    {
+        for($i = 0; $i < count($data); ++$i)
+        {
+            $airlines[$i] = $data[$i]["airline"]["name"];
+        }
+        
+        return array_unique($airlines);
+    }
+
     public function GetDatas($datas)
     {   
         for($i = 0; $i < count($datas); ++$i)
         {
+            //$data["time"] = $datas[$i]["departure"]["scheduled"];
                 $data["time"] = date(substr(substr($datas[$i]["departure"]["scheduled"], 11, 8), 0,5));
-                if(round(abs(strtotime($data["time"]) - strtotime(date('H:i'))) / 60) < 480)
+                if(round(abs(strtotime($data["time"]) - strtotime(date('H:i'))) / 60) < 480 && strtotime(date('H:i')) < strtotime($data["time"]))
                 {
-                    //$osszesRepter[$i] = $datas[$i]["departure"]["airport"];
+                    //$data["seged"] = date('H:i') ." < ". $data["time"];
 
                     $data["start"] = $datas[$i]["departure"]["airport"];
                     $data["destination"] = $datas[$i]["arrival"]["airport"];
@@ -88,3 +100,8 @@ if($kivalasztottRepter == "")
 }
 
 $style = json_decode(file_get_contents("settings.json"), true);
+
+$table = "light";
+if($style["style"]=="light.css"){
+    $table = "dark";
+}

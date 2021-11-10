@@ -1,6 +1,8 @@
 <?php
 require("php/Datas.php");
 
+
+
 $linkek = [
     ['Liszt Ferenc Nemzetközi Repülőtér', 'https://www.lisztferencrepuloter.com'],
     ['Budapest Nemzetközi Repülőtér', 'https://www.bud.hu'],
@@ -61,7 +63,7 @@ require("parts/head.php");
             <!-- Background image -->
         </header>
 
-        <table class="table table-hover table-responsive text-center table-dark">
+        <!--<table class="table table-hover table-responsive text-center table-dark">
             <thead>
                 <tr>
                     <th scope="col">Repterek</th>
@@ -81,7 +83,38 @@ require("parts/head.php");
                 </tr>
             <?php } ?>
             </tbody>
-        </table>
+        </table>-->
+
+
+        <!-- Táblázat -->
+
+        <table class="table table-hover table-<?php echo $table ?> table-responsive text-center mt-3" id="start" style="width: 50%; margin-left: auto; margin-right: auto">
+                    <thead>
+                        <tr>
+                            <th colspan="2">A felhasznált légitársaságok honlapjai</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Repterek</th>
+                            <th scope="col">Honlap</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $call = $dataArray->GetAirlines($repterek); 
+                        $counter = 0;
+                        ?>
+                        <?php if(!is_null($call)):?>
+                            <?php foreach($call as $data): ?>
+                                <tr>
+                                    <td><?php echo $data; ?></td>
+                                    <td><a href="<?php echo "http://".strtolower(str_replace("'","",str_replace(" ","",$data) . ".com")); ?>" target="_blank">Katt</a></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+
+        <!-- Táblázat -->
         <div id="load">
             <?php
                 require("parts/footer.php");

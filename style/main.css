@@ -86,10 +86,6 @@ main div::-webkit-scrollbar-thumb {
     to {left: 3%;}
 }
 
-tr:nth-child(2n+1){
-    background-color: #fff;
-}
-
 th,td{
     width: 20%;
 }

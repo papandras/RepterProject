@@ -11,10 +11,7 @@ require("php/Datas.php");
 /**
  * Ez a stíluslapok közötti váltást teszi lehetővé
  */
-$table = "light";
-if($style["style"]=="light.css"){
-    $table = "dark";
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -203,7 +200,7 @@ require("parts/head.php");
                                     ++$counter;
                                     ?>
                                     <tr>
-                                        <td><?php echo substr($data["time"], 0,5); ?></td>
+                                        <td><?php echo $data["time"]; ?></td>
                                         <td class="tarsasag"><?php echo $data["company"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["terminal"]; ?></td>
