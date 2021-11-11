@@ -11,7 +11,6 @@ require("php/Datas.php");
 /**
  * Ez a stíluslapok közötti váltást teszi lehetővé
  */
-
 ?>
 
 <!DOCTYPE html>
@@ -47,9 +46,9 @@ require("parts/head.php");
                                     <!--   <label style="color: black; position: absolute; right: 380px; top: 5px;">Válassz repteret:</label>     -->
                                     <select class="form-control" style="position: absolute; right: 100px;  top: 0px; width: 20%;" name="repter" onchange="this.form.submit();">
                                         <option value="">Válassz repteret</option>
-                                        <?php foreach($x->GetAirports($repterek) as $repter): ?>
+                                        <?php foreach($dataArray->GetAirports($repterek) as $repter): ?>
                                             <?php if($repter != null): ?>
-                                                <option name="<?php echo $repter; ?>" <?php if($kivalasztottRepter==$repter){echo "selected";} ?>><?php echo $repter ?></option>
+                                                <option value="<?php echo $repter; ?>" <?php if($kivalasztottRepter==$repter){echo "selected";} ?>><?php echo $repter ?></option>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
@@ -70,13 +69,13 @@ require("parts/head.php");
                                 ?>
                                 <form action="php/style.php" method="POST">
                                     <select class="form-control" name="bgc" onchange="this.form.submit();">
-                                        <option value="light.css" name="black.css" <?php if($style["style"]=="light.css"){echo "selected";} ?>>Fehér</option>
-                                        <option value="dark.css" name="white.css" <?php if($style["style"]=="dark.css"){echo "selected";} ?>>Fekete</option>
+                                        <option value="light.css" <?php if($style["style"]=="light.css"){echo "selected";} ?>>Fehér</option>
+                                        <option value="dark.css" <?php if($style["style"]=="dark.css"){echo "selected";} ?>>Fekete</option>
                                     </select>
                                 </form>
                             </li>
                             <li style="position: absolute; right: 8%;">
-                                <button class="btn" style="position: absolute; top: 0px;" onclick="refresh()"><img src="./img/refresh.png" height="30px" title="Adatok legutóbb frissítve: <?php echo date ("Y F d H:i:s.", filemtime("data.json")) ?>"></button>
+                                <button class="btn" style="position: absolute; top: 0px;" onclick="refresh()"><img src="./img/refresh.png" style="height: 30px;" title="Adatok legutóbb frissítve: <?php echo date ("Y F d H:i:s.", filemtime("data.json")) ?>"></button>
                             </li>
                         </ul>
                     </div>
@@ -139,9 +138,6 @@ require("parts/head.php");
                                     /**
                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
                                     * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg. --> uptade(pár nappal később): valamiért nem jó, kerestem másik megoldást
-                                    *
-                                    * $data["destination"] == "Shenzhen"
-                                    * Csak a Shenzhen reptér adatait jeleníti meg
                                     */
                                     ++$counter;
                                     ?>
@@ -161,9 +157,9 @@ require("parts/head.php");
                                  * Ha nics éppen repülő, kiírjuk hogy nincsen.
                                  */
                                 ?>
-                                <tbody>
+                                <tr>
                                     <td colspan="5" class="text-center"><strong>Nincs érkező repülőgép!</strong></td>
-                                </tbody>
+                                </tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
@@ -183,8 +179,8 @@ require("parts/head.php");
                     </thead>
                     <tbody>
                         <?php
-                        $call = $dataArray->GetDatas($repterek); 
-                        $counter = 0;
+                            $call = $dataArray->GetDatas($repterek); 
+                            $counter = 0;
                         ?>
                         <?php if(!is_null($call)):?>
                             <?php foreach($call as $data): ?>
@@ -193,9 +189,6 @@ require("parts/head.php");
                                     /**
                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480
                                     * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg.
-                                    *
-                                    * $data["destination"] == "Shenzhen"
-                                    * Csak a Shenzhen reptér adatait jeleníti meg
                                     */
                                     ++$counter;
                                     ?>

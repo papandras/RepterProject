@@ -6,27 +6,28 @@ $repterek = json_decode(file_get_contents("data.json"), true);
 
 class Datas
 {
-
     public function GetAirports($data)
     {
         $osszesRepter = [];
         for($i = 0; $i < count($data); ++$i)
         {
-            //round(abs(strtotime($data["time"]) - strtotime(date('H:i'))) / 60) < 480
-            //$time = round(abs(strtotime(date(substr(substr($data[$i]["departure"]["scheduled"], 11, 8), 0,5))) - strtotime(date('H:i'))) / 60);
-            //if($data[$i]["airline"]["name"] != null){
-            //    $osszesRepter[$i] = $data[$i]["departure"]["airport"];
-            //}
-
             $time = date(substr(substr($data[$i]["departure"]["scheduled"], 11, 8), 0,5));
-            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) < 480 && strtotime($time) > strtotime(date('H:i')))
+            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) < 480 && $time >= date('H:i'))
             {
                 $osszesRepter[$i] = $data[$i]["departure"]["airport"];
             }
         }
+        for($i = 0; $i < count($data); ++$i)
+        {
+            $time = date(substr(substr($data[$i]["arrival"]["scheduled"], 11, 8), 0,5));
+            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) < 480 && $time >= date('H:i'))
+            {
+                $osszesRepter[$i+count($data)+1] = $data[$i]["arrival"]["airport"];
+            }
+        }
 
         if($osszesRepter==null){
-            $osszesRepter = ["Jelenleg egyik reptérről sem indul járat 8 órán belül!"];
+            $osszesRepter = ["Jelenleg egyik reptérről sem indul/érkezik járat 8 órán belül!"];
         }
         
         return array_unique($osszesRepter);
@@ -43,55 +44,53 @@ class Datas
         return array_unique($airlines);
     }
 
-    public function GetDatas($datas)
+    public function GetDatas($data)
     {   
-        for($i = 0; $i < count($datas); ++$i)
+        $airData = [];
+        for($i = 0; $i < count($data); ++$i)
         {
+            $dataSeged = [];
             //$data["time"] = $datas[$i]["departure"]["scheduled"];
-                $data["time"] = date(substr(substr($datas[$i]["departure"]["scheduled"], 11, 8), 0,5));
-                if(round(abs(strtotime($data["time"]) - strtotime(date('H:i'))) / 60) < 480 && strtotime(date('H:i')) < strtotime($data["time"]))
+                $dataSeged["time"] = date(substr(substr($data[$i]["departure"]["scheduled"], 11, 8), 0,5));
+                if(round(abs(strtotime($dataSeged["time"]) - strtotime(date('H:i'))) / 60) < 480 && $dataSeged["time"] >= date('H:i'))
                 {
                     //$data["seged"] = date('H:i') ." < ". $data["time"];
-
-                    $data["start"] = $datas[$i]["departure"]["airport"];
-                    $data["destination"] = $datas[$i]["arrival"]["airport"];
-                    $data["company"] = $datas[$i]["airline"]["name"];
-                    $data["number"] = $datas[$i]["flight"]["iata"];
-                    $data["terminal"] = $datas[$i]["departure"]["terminal"];
-                    switch($datas[$i]["flight_status"]){
+                    $dataSeged["start"] = $data[$i]["departure"]["airport"];
+                    $dataSeged["destination"] = $data[$i]["arrival"]["airport"];
+                    $dataSeged["company"] = $data[$i]["airline"]["name"];
+                    $dataSeged["number"] = $data[$i]["flight"]["iata"];
+                    $dataSeged["terminal"] = $data[$i]["departure"]["terminal"];
+                    switch($data[$i]["flight_status"]){
                         case "scheduled":
-                            $data["status"] = "Ütemezett";
+                            $dataSeged["status"] = "Ütemezett";
                             break;
                         case "active":
-                            $data["status"] = "Aktív";
+                            $dataSeged["status"] = "Aktív";
                             break;
                         case "landed":
-                            $data["status"] = "Leszállt";
+                            $dataSeged["status"] = "Leszállt";
                             break;
                         case "scheduled":
-                            $data["status"] = "Törölve";
+                            $dataSeged["status"] = "Törölve";
                             break;
                         case "incident":
-                            $data["status"] = "Incidens";
+                            $dataSeged["status"] = "Incidens";
                             break;
                         case "data":
-                            $data["status"] = "Elterelt";
+                            $dataSeged["status"] = "Elterelt";
                             break;
-                        default: $data["status"] = NULL;
+                        default: $dataSeged["status"] = NULL;
                     }
+                    $airData[$i] = $dataSeged;
                 }
 
-                $datas[$i] = $data;
+                
         }
-        return $datas;
+        return array_merge($airData);
     }
-
-    
 }
 
 $dataArray = new Datas();
-
-$x = new Datas();
 
 //$kivalasztottRepter = $_POST["repter"] ?? null;
 //$kivalasztottRepter == "" ? $kivalasztottRepter = "Shenzhen" : $kivalasztottRepter = $_POST["repter"];
@@ -100,7 +99,7 @@ $kivalasztottRepter = json_decode(file_get_contents("settings.json"), true)["air
 
 if($kivalasztottRepter == "")
 {
-    $kivalasztottRepter = "Shenzhen";
+    $kivalasztottRepter = $dataArray->GetDatas($repterek)[0]["start"];
 }
 
 $style = json_decode(file_get_contents("settings.json"), true);
