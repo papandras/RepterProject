@@ -24,8 +24,43 @@ function refresh(){
             // here is the code that will run on client side after running download.php on server
 
             // function below reloads current page
-            location.reload();
             alert("Adatok frissítve!");
+            location.reload();
+            
         }
     });
+}
+
+let counter = 0;
+function zoom(){
+    let zoom = document.getElementById("zoom").style;
+    ++counter;
+    if(counter % 2 == 0)
+    {
+        zoom.width = "";
+        zoom.position = "relative";
+        zoom.margin = "";
+        zoom.left = "";
+        zoom.right = "";
+        zoom.top = "";
+        zoom.border = "";
+        zoom.backgroundColor = "";
+        document.getElementById("load").style.position = "";
+        document.getElementById("load").style.bottom = "";
+    }
+    else if (counter % 2 == 1)
+    {
+        zoom.width = "110%";
+        zoom.position = "absolute";
+        zoom.display = "block";
+        zoom.margin = "auto";
+        zoom.left = "-200px";
+        zoom.right = "-200px";
+        zoom.top = "300px";
+        zoom.border = "2px solid darkblue";
+        zoom.backgroundColor = "lightblue";
+        document.getElementById("load").style.position = "fixed";
+        document.getElementById("load").style.bottom = "0px";
+    }
+
 }

@@ -102,7 +102,7 @@ require("parts/head.php");
         </header>
 
         <main>
-            <div>
+            <div style="position: relative;" id="zoom"><button style="position: absolute; top: 0px; right: 0px;" onclick="zoom()" class="btn"><img src="./img/fullscreen.png" alt="Full screen" style="height: 30px;"></button>
                 <?php
                 /**
                  * A két gomb jeleníti meg az érkező / induló járatokat
@@ -112,7 +112,7 @@ require("parts/head.php");
                     <button class="list-group-item" aria-current="true" onclick="start()">Indulás</button>
                     <button class="list-group-item" onclick="arrive()">Érkezés</button>
                 </div>
-
+                
                 <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="dest" style="display: none">
                     <thead>
                         <tr>
@@ -146,7 +146,13 @@ require("parts/head.php");
                                         <td class="tarsasag"><?php echo $data["company"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["terminal"]; ?></td>
-                                        <td><?php echo $data["status"]; ?></td>
+                                        <td>
+                                            <?php echo $data["status"];
+                                            if(!is_null($data["destDelay"])):
+                                            ?>
+                                                <sub><?php echo "<br>Késik: ". $data["destDelay"]." percet"; ?></sub>
+                                            <?php endif; ?>
+                                        </td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
@@ -197,7 +203,13 @@ require("parts/head.php");
                                         <td class="tarsasag"><?php echo $data["company"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["terminal"]; ?></td>
-                                        <td><?php echo $data["status"]; ?></td>
+                                        <td>
+                                            <?php echo $data["status"];
+                                            if(!is_null($data["arrivalDelay"])):
+                                            ?>
+                                                <sub><?php echo "<br>Késik: ". $data["arrivalDelay"]." percet"; ?></sub>
+                                            <?php endif; ?>
+                                        </td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
