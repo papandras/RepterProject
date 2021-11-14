@@ -21,7 +21,7 @@
 >Hivatkozások\
 >Reptér választás\
 >Fekete / Fehér háttér\
->Adatok frissítés\
+>Adatok frissítés
 
 
 >Felhasználói dokumentáció
