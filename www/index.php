@@ -99,6 +99,9 @@ require("parts/head.php");
         </header>
 
         <main>
+            <div class="alert alert-success text-center" id="success-alert" style="display: none">
+                <strong>Siker! </strong> Adatok frissítve!
+            </div>
             <div style="position: relative;" id="zoom"><button style="position: absolute; top: 0px; right: 0px;" onclick="zoom()" class="btn bg-white"><img id="full" src="./img/fullscreen.png" alt="Full screen" style="height: 30px;"></button>
                 <?php
                 /**

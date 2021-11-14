@@ -15,18 +15,12 @@ function()
 },10000)
 
 function refresh(){
-    // function below will run download.php?h=michael
     $.ajax({
         type: "GET",
         url: "php/download.php" ,
         success : function() { 
-
-            // here is the code that will run on client side after running download.php on server
-
-            // function below reloads current page
-            alert("Adatok frissítve!");
-            location.reload();
-            
+            document.getElementById("success-alert").style.display = "block";
+            setTimeout(function() { document.getElementById("success-alert").style.display = "none"; }, 5000);
         }
     });
 }
@@ -65,5 +59,5 @@ function zoom(){
         document.getElementById("load").style.bottom = "0px";
         document.getElementById("full").src ="./img/befele.png";
     }
-
 }
+
