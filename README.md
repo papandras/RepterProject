@@ -7,8 +7,7 @@
 >>Csapat: Pap András, Farkas Péter, Pardi Polett\
 >>Gyakorlatvezető tanár neve: Várkonyi Tibor\
 >>Feladat megnevezése: Repülünk!\
->>Tartalom\
-
+>>Tartalom
 
 >Szerző\
 >Tartalom\
