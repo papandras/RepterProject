@@ -32,9 +32,6 @@ require("parts/head.php");
                                 <a class="nav-link" aria-current="page" href="index.php">Kezdőlap</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="about.php">Rólunk</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="links.php">Hivatkozások</a>
                             </li>
                         </ul>
