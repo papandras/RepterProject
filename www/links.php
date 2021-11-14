@@ -105,7 +105,7 @@ require("parts/head.php");
                             <?php foreach($call as $data): ?>
                                     <tr>
                                         <td><?php echo $data; ?></td>
-                                        <td><a href="<?php echo "http://".strtolower(str_replace("'","",str_replace(" ","",$data) . ".com")); ?>" target="_blank">Katt</a></td>
+                                        <td><a href="<?php echo "http://".strtolower(str_replace("'","",str_replace(" ","",$data) . ".com")); ?>" target="_blank">Részletek</a></td>
                                     </tr>
 
                             <?php endforeach; ?>
