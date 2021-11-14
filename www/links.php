@@ -32,9 +32,6 @@ require("parts/head.php");
                                 <a class="nav-link" aria-current="page" href="index.php">Kezdőlap</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="about.php">Rólunk</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="links.php">Hivatkozások</a>
                             </li>
                         </ul>
@@ -105,7 +102,7 @@ require("parts/head.php");
                             <?php foreach($getDatas as $data): ?>
                                     <tr>
                                         <td><?php echo $data; ?></td>
-                                        <td><a href="<?php echo "http://".strtolower(str_replace("'","",str_replace(" ","",$data) . ".com")); ?>" target="_blank">Katt</a></td>
+                                        <td><a href="<?php echo "http://".strtolower(str_replace("'","",str_replace(" ","",$data) . ".com")); ?>" target="_blank">Részletek</a></td>
                                     </tr>
 
                             <?php endforeach; ?>
