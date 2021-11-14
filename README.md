@@ -22,8 +22,8 @@
 >Reptér választás\
 >Fekete / Fehér háttér\
 >Adatok frissítés\
->Felhasználói dokumentáció\
->>Feladat\
+>Felhasználói dokumentáció
+>>Feladat
 >>>Egy repülőgép felügyeleti szolgáltatást valósítottunk meg a weboldalunkon. A kiválasztott reptérnek láthatod a valós idejű indulási és érkezési, késési adatait az elkövetkezendő 8 órára. A programot egy ingyenes API szolgáltatással alkottuk meg PHP-ban. Felhasználóbarát, valamint a docker segítségével könnyen módosítható.\
 >>Környezet\
 >>Az oldal bármilyen böngészőben futtatható.\
