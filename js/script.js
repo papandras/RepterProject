@@ -47,9 +47,11 @@ function zoom(){
         zoom.backgroundColor = "";
         document.getElementById("load").style.position = "";
         document.getElementById("load").style.bottom = "";
+        document.getElementById("full").src ="./img/fullscreen.png";
     }
     else if (counter % 2 == 1)
     {
+        zoom.zIndex = 999;
         zoom.width = "110%";
         zoom.position = "absolute";
         zoom.display = "block";
@@ -61,6 +63,7 @@ function zoom(){
         zoom.backgroundColor = "lightblue";
         document.getElementById("load").style.position = "fixed";
         document.getElementById("load").style.bottom = "0px";
+        document.getElementById("full").src ="./img/befele.png";
     }
 
 }

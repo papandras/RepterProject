@@ -5,9 +5,9 @@
 $style = json_decode(file_get_contents("settings.json"), true);
 /**
  * Datas osztály meghívása, 
- * $dataArray a példánya
+ * $datas a példánya
  */
-require("php/Datas.php");
+require("php/sheet.php");
 /**
  * Ez a stíluslapok közötti váltást teszi lehetővé
  */
@@ -46,7 +46,7 @@ require("parts/head.php");
                                     <!--   <label style="color: black; position: absolute; right: 380px; top: 5px;">Válassz repteret:</label>     -->
                                     <select class="form-control" style="position: absolute; right: 100px;  top: 0px; width: 20%;" name="repter" onchange="this.form.submit();">
                                         <option value="">Válassz repteret</option>
-                                        <?php foreach($dataArray->GetAirports($repterek) as $repter): ?>
+                                        <?php foreach($datas->GetAirports($repterek) as $repter): ?>
                                             <?php if($repter != null): ?>
                                                 <option value="<?php echo $repter; ?>" <?php if($kivalasztottRepter==$repter){echo "selected";} ?>><?php echo $repter ?></option>
                                             <?php endif; ?>
@@ -102,7 +102,7 @@ require("parts/head.php");
         </header>
 
         <main>
-            <div style="position: relative;" id="zoom"><button style="position: absolute; top: 0px; right: 0px;" onclick="zoom()" class="btn"><img src="./img/fullscreen.png" alt="Full screen" style="height: 30px;"></button>
+            <div style="position: relative;" id="zoom"><button style="position: absolute; top: 0px; right: 0px;" onclick="zoom()" class="btn bg-white"><img id="full" src="./img/fullscreen.png" alt="Full screen" style="height: 30px;"></button>
                 <?php
                 /**
                  * A két gomb jeleníti meg az érkező / induló járatokat
@@ -128,12 +128,13 @@ require("parts/head.php");
                     </thead>
                     <tbody>
                         <?php
-                            $call = $dataArray->GetDatas($repterek);
+                            $getDatas = $datas->GetDatas($repterek);
                             $counter = 0;
                         ?>
-                        <?php if(!is_null($call)):?>
-                            <?php foreach($call as $data): ?>
-                                <?php if(isset($data["destination"]) && $data["destination"] == $kivalasztottRepter /*&& (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480*/):?>
+                        <?php if(!is_null($getDatas)):?>
+                            <?php foreach($getDatas as $data):?>
+                                <?php if(isset($data["arrival_airport"]) && $data["arrival_airport"] == $kivalasztottRepter && TimeDifference(date('H:i'), $data["arrival_scheduled"]) < $datas->GetIntervalHours()
+                                ):?>
                                     <?php
                                     /**
                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
@@ -142,15 +143,15 @@ require("parts/head.php");
                                     ++$counter;
                                     ?>
                                     <tr>
-                                        <td><?php echo $data["time"]; ?></td>
-                                        <td class="tarsasag"><?php echo $data["company"]; ?></td>
+                                        <td><?php echo $data["arrival_scheduled"]; ?></td>
+                                        <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
-                                        <td><?php echo $data["terminal"]; ?></td>
+                                        <td><?php echo $data["arrival_terminal"]; ?></td>
                                         <td>
                                             <?php echo $data["status"];
-                                            if(!is_null($data["destDelay"])):
+                                            if(!is_null($data["arrival_delay"])):
                                             ?>
-                                                <sub><?php echo "<br>Késik: ". $data["destDelay"]." percet"; ?></sub>
+                                                <sub><?php echo "<br>Késik: ". $data["arrival_delay"]." percet"; ?></sub>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
@@ -185,29 +186,28 @@ require("parts/head.php");
                     </thead>
                     <tbody>
                         <?php
-                            $call = $dataArray->GetDatas($repterek); 
                             $counter = 0;
                         ?>
-                        <?php if(!is_null($call)):?>
-                            <?php foreach($call as $data): ?>
-                                <?php if(isset($data["start"]) && $data["start"] == $kivalasztottRepter /*&& (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480*/): ?>
+                        <?php if(!is_null($getDatas)):?>
+                            <?php foreach($getDatas as $data): ?>
+                                <?php if(isset($data["departure_airport"]) && $data["departure_airport"] == $kivalasztottRepter && TimeDifference(date('H:i'), $data["departure_scheduled"]) < $datas->GetIntervalHours()):?>
                                     <?php
                                     /**
-                                    * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 > 480
-                                    * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg.
+                                    * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
+                                    * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg. --> uptade(pár nappal később): valamiért nem jó, kerestem másik megoldást
                                     */
                                     ++$counter;
                                     ?>
                                     <tr>
-                                        <td><?php echo $data["time"]; ?></td>
-                                        <td class="tarsasag"><?php echo $data["company"]; ?></td>
+                                        <td><?php echo $data["departure_scheduled"]; ?></td>
+                                        <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
-                                        <td><?php echo $data["terminal"]; ?></td>
+                                        <td><?php echo $data["departure_terminal"]; ?></td>
                                         <td>
                                             <?php echo $data["status"];
-                                            if(!is_null($data["arrivalDelay"])):
+                                            if(!is_null($data["departure_delay"])):
                                             ?>
-                                                <sub><?php echo "<br>Késik: ". $data["arrivalDelay"]." percet"; ?></sub>
+                                                <sub><?php echo "<br>Késik: ". $data["departure_delay"]." percet"; ?></sub>
                                             <?php endif; ?>
                                         </td>
                                     </tr>

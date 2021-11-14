@@ -1,106 +1,118 @@
 <?php
 
-
-$repterek = json_decode(file_get_contents("data.json"), true);
+function TimeDifference($timeFrom, $timeTo)
+{
+    $timeFrom = new DateTime($timeFrom);
+    $timeTo = new DateTime($timeTo);
+    if($timeFrom < $timeTo)
+    {
+        $interval = $timeFrom->diff($timeTo);
+        return $interval;
+    }
+    elseif($timeFrom > $timeTo)
+    {
+        $from = $timeFrom->format('H') + $timeFrom->format('i') / 60;
+        $to = $timeTo->format('H') + $timeFrom->format('i') / 60;
+        $interval = 24 - $from + $to;
+        return $interval;
+    }
+    else
+    {
+        return "Egyenlő";
+    }
+}
 
 class Datas
 {
-    public function GetAirports($data)
-    {
-        $osszesRepter = [];
-        for($i = 0; $i < count($data); ++$i)
-        {
-            $time = date(substr(substr($data[$i]["departure"]["scheduled"], 11, 8), 0,5));
-            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) < 480 && $time >= date('H:i'))
-            {
-                $osszesRepter[$i] = $data[$i]["departure"]["airport"];
-            }
-        }
-        for($i = 0; $i < count($data); ++$i)
-        {
-            $time = date(substr(substr($data[$i]["arrival"]["scheduled"], 11, 8), 0,5));
-            if(round(abs(strtotime($time) - strtotime(date('H:i'))) / 60) > 480 && $time >= date('H:i'))
-            {
-                $osszesRepter[$i+count($data)+1] = $data[$i]["arrival"]["airport"];
-            }
-        }
+    private $airportsData = array();
+    private $airports = array();
+    private $airlines = array();
+    private $intervalHour = 0;
 
-        if($osszesRepter==null){
-            $osszesRepter = ["Jelenleg egyik reptérről sem indul/érkezik járat 8 órán belül!"];
-        }
-        
-        return array_unique($osszesRepter);
-    }
-
-    public function GetAirlines($data)
+    public function __construct($inputArray, $intervalHour)
     {
-        $airlines = [];
-        for($i = 0; $i < count($data); ++$i)
+        if(isset($inputArray))
         {
-            $airlines[$i] = $data[$i]["airline"]["name"];
-        }
-        
-        return array_unique($airlines);
-    }
+            $this->intervalHour = $intervalHour;
 
-    public function GetDatas($data)
-    {
-        $airData = [];
-        for($i = 0; $i < count($data); ++$i)
-        {
-            $dataSeged = [];
-            $dataSeged["time1"] = date(substr(substr($data[$i]["departure"]["scheduled"], 11, 8), 0,5));
-            $dataSeged["time2"] = date(substr(substr($data[$i]["arrival"]["scheduled"], 11, 8), 0,5));
-            if(round(abs(strtotime($dataSeged["time1"]) - strtotime(date('H:i'))) / 60) < 480 && $dataSeged["time1"] >= date('H:i') &&
-            round(abs(strtotime($dataSeged["time2"]) - strtotime(date('H:i'))) / 60) > 480 && $dataSeged["time2"] >= date('H:i')) // ezt a részt megnézzük működik vagy sem...
+            for($i = 0; $i < count($inputArray); ++$i)
             {
-                $dataSeged["start"] = $data[$i]["departure"]["airport"];
-                $dataSeged["destination"] = $data[$i]["arrival"]["airport"];
-                $dataSeged["company"] = $data[$i]["airline"]["name"];
-                $dataSeged["number"] = $data[$i]["flight"]["iata"];
-                $dataSeged["terminal"] = $data[$i]["departure"]["terminal"];
-                $dataSeged["destDelay"] = $data[$i]["departure"]["delay"];
-                $dataSeged["arrivalDelay"] = $data[$i]["arrival"]["delay"];
-                switch($data[$i]["flight_status"]){
+                $helper = [];
+                $helper["flight_date"] = $inputArray[$i]["flight_date"];
+                $helper["airline"] = $inputArray[$i]["airline"]["name"];
+                $helper["departure_airport"] = $inputArray[$i]["departure"]["airport"];
+                $helper["departure_scheduled"] = date(substr(substr($inputArray[$i]["departure"]["scheduled"], 11, 8), 0,5));
+                $helper["departure_delay"] = $inputArray[$i]["departure"]["delay"];
+                $helper["departure_terminal"] = $inputArray[$i]["departure"]["terminal"];
+                $helper["arrival_airport"] = $inputArray[$i]["arrival"]["airport"];
+                $helper["arrival_scheduled"] = date(substr(substr($inputArray[$i]["arrival"]["scheduled"], 11, 8), 0,5));
+                $helper["arrival_delay"] = $inputArray[$i]["arrival"]["delay"];
+                $helper["arrival_terminal"] = $inputArray[$i]["arrival"]["terminal"];
+                switch($inputArray[$i]["flight_status"]){
                     case "scheduled":
-                        $dataSeged["status"] = "Ütemezett";
+                        $helper["status"] = "Ütemezett";
                         break;
                     case "active":
-                        $dataSeged["status"] = "Aktív";
+                        $helper["status"] = "Aktív";
                         break;
                     case "landed":
-                        $dataSeged["status"] = "Leszállt";
+                        $helper["status"] = "Leszállt";
                         break;
                     case "scheduled":
-                        $dataSeged["status"] = "Törölve";
+                        $helper["status"] = "Törölve";
                         break;
                     case "incident":
-                        $dataSeged["status"] = "Incidens";
+                        $helper["status"] = "Incidens";
                         break;
                     case "data":
-                        $dataSeged["status"] = "Elterelt";
+                        $helper["status"] = "Elterelt";
                         break;
-                    default: $dataSeged["status"] = "-";
+                    default: $helper["status"] = "-";
                 }
-                $airData[$i] = $dataSeged;
+                $helper["number"] = $inputArray[$i]["flight"]["iata"];
+
+                array_push($this->airportsData, $helper);
+
+                if(TimeDifference(date('H:i'), $helper["departure_scheduled"]) < $this->intervalHour)
+                {
+                    array_push($this->airports, $helper["departure_airport"]);
+                }
+                if(TimeDifference(date('H:i'), $helper["arrival_scheduled"]) < $this->intervalHour)
+                {
+                    array_push($this->airports, $helper["arrival_airport"]);
+                }
+
+                array_push($this->airlines, $helper["airline"]);
             }
         }
-        return array_merge($airData);
+        else
+        {
+            return "Hibás bemeneti karakterlánc!";
+        }
     }
-}
 
-$dataArray = new Datas();
+    public function GetDatas()
+    {
+        return $this->airportsData;
+    }
 
-$kivalasztottRepter = json_decode(file_get_contents("settings.json"), true)["airport"];
+    public function GetAirports()
+    {
+        return array_merge(array_unique($this->airports));
+    }
 
-if($kivalasztottRepter == "")
-{
-    $kivalasztottRepter = array_merge($dataArray->GetAirports($repterek))[0];
-}
+    public function GetAirlines()
+    {
+        return array_merge(array_unique($this->airlines));
+    }
 
-$style = json_decode(file_get_contents("settings.json"), true);
+    public function GetIntervalHours()
+    {
+        return $this->intervalHour;
+    }
 
-$table = "light";
-if($style["style"]=="light.css"){
-    $table = "dark";
+    public function SetIntervalHours($intervalHour)
+    {
+        $this->intervalHour = $intervalHour;
+    }
 }

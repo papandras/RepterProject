@@ -1,5 +1,5 @@
 <?php
-require("php/Datas.php");
+require("php/sheet.php");
 
 $linkek = [
     ['Liszt Ferenc Nemzetközi Repülőtér', 'https://www.lisztferencrepuloter.com'],
@@ -98,11 +98,11 @@ require("parts/head.php");
                     </thead>
                     <tbody>
                         <?php
-                        $call = $dataArray->GetAirlines($repterek); 
+                        $getDatas = $datas->GetAirlines($repterek); 
                         $counter = 0;
                         ?>
-                        <?php if(!is_null($call)):?>
-                            <?php foreach($call as $data): ?>
+                        <?php if(!is_null($getDatas)):?>
+                            <?php foreach($getDatas as $data): ?>
                                     <tr>
                                         <td><?php echo $data; ?></td>
                                         <td><a href="<?php echo "http://".strtolower(str_replace("'","",str_replace(" ","",$data) . ".com")); ?>" target="_blank">Katt</a></td>
