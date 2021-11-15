@@ -4,7 +4,7 @@ require("Datas.php");
 
 $repterek = json_decode(file_get_contents("data.json"), true);
 
-$datas = new Datas($repterek, 8);
+$datas = new Datas($repterek, date("8"));
 
 $kivalasztottRepter = json_decode(file_get_contents("settings.json"), true)["airport"];
 
@@ -24,6 +24,6 @@ if($style["style"]=="light.css"){
     $table = "dark";
 }
 
-
+//var_dump(TimeDifference(date('H:i'), "08:20"));
 
 //echo TimeDifference(date('H:i'), "08:20");

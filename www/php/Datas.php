@@ -7,14 +7,14 @@ function TimeDifference($timeFrom, $timeTo)
     if($timeFrom < $timeTo)
     {
         $interval = $timeFrom->diff($timeTo);
-        return $interval;
+        return (int)$interval;
     }
     elseif($timeFrom > $timeTo)
     {
         $from = $timeFrom->format('H') + $timeFrom->format('i') / 60;
         $to = $timeTo->format('H') + $timeFrom->format('i') / 60;
         $interval = 24 - $from + $to;
-        return $interval;
+        return (int)$interval;
     }
     else
     {
@@ -27,13 +27,13 @@ class Datas
     private $airportsData = array();
     private $airports = array();
     private $airlines = array();
-    private $intervalHour = 0;
+    private $intervalHour;
 
     public function __construct($inputArray, $intervalHour)
     {
         if(isset($inputArray))
         {
-            $this->intervalHour = $intervalHour;
+            $this->intervalHour = (int)$intervalHour;
 
             for($i = 0; $i < count($inputArray); ++$i)
             {
