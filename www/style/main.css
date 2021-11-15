@@ -77,6 +77,12 @@
         display: none;
     }
     
+    .textStroke {
+        font-weight: bolder;
+        text-decoration: underline;
+        letter-spacing: 2px;
+    }
+    
     @-webkit-keyframes txt {
         from {
             right: 5%;

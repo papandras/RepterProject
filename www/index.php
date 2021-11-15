@@ -104,8 +104,8 @@ require("parts/head.php");
                  */
                 ?>
                 <div class="list-group list-group-horizontal-md" id="tablemenu">
-                    <button class="list-group-item" aria-current="true" onclick="start()">Indulás</button>
-                    <button class="list-group-item" onclick="arrive()">Érkezés</button>
+                    <button class="list-group-item text-center buttonChange" aria-current="true" onclick="start()">Indulás</button>
+                    <button class="list-group-item text-center buttonChange" onclick="arrive()">Érkezés</button>
                 </div>
                 <!-- Érkező járatok táblája -->
                 <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="dest" style="display: none">

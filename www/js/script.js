@@ -1,11 +1,15 @@
 function start() {
     document.getElementById("dest").style.display = "none";
     document.getElementById("start").style.display = "";
+    document.getElementsByClassName("buttonChange")[0].classList.add("textStroke");
+    document.getElementsByClassName("buttonChange")[1].classList.remove("textStroke");
 }
 
 function arrive() {
     document.getElementById("dest").style.display = "";
     document.getElementById("start").style.display = "none";
+    document.getElementsByClassName("buttonChange")[1].classList.add("textStroke");
+    document.getElementsByClassName("buttonChange")[0].classList.remove("textStroke");
 }
 
 var autoLoad = setInterval(
