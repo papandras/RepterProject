@@ -23,7 +23,3 @@ $table = "light";
 if($style["style"]=="light.css"){
     $table = "dark";
 }
-
-//var_dump(TimeDifference(date('H:i'), "08:20"));
-
-//echo TimeDifference(date('H:i'), "08:20");

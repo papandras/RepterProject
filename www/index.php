@@ -140,7 +140,7 @@ require("parts/head.php");
                                     ++$counter;
                                     ?>
                                     <tr>
-                                        <td><?php echo $data["arrival_scheduled"]; var_dump($data["arrival_scheduled"])?></td>
+                                        <td><?php echo $data["arrival_scheduled"];?></td>
                                         <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["arrival_terminal"]; ?></td>
@@ -196,7 +196,7 @@ require("parts/head.php");
                                     ++$counter;
                                     ?>
                                     <tr>
-                                        <td><?php echo $data["departure_scheduled"]; var_dump($data["departure_scheduled"]);?></td>
+                                        <td><?php echo $data["departure_scheduled"];?></td>
                                         <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["departure_terminal"]; ?></td>
