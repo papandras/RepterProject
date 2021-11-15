@@ -1,17 +1,6 @@
 <?php
 
-/**
- * A request.php-ban letöltött adatokat olvassa be.
- */
-$style = json_decode(file_get_contents("settings.json"), true);
-/**
- * Datas osztály meghívása, 
- * $datas a példánya
- */
 require("php/sheet.php");
-/**
- * Ez a stíluslapok közötti váltást teszi lehetővé
- */
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -60,18 +49,18 @@ require("parts/head.php");
                                  * Ebben a formban cserélődnek a stíluslapok
                                  * onchange="this.form.submit() --> Submit gombként funkcionál!
                                  * 
-                                 * if($style["style"]=="light.css" --> echo "selected"
+                                 * if($settings["style"]=="light.css" --> echo "selected"
                                  * Az aktuálisan beállított téma kerül kijelölésre
                                  * 
-                                 * style.php-ban lesz feldolgozva
+                                 * style.php-ban van feldolgozva
                                  */
                                 ?>
                                 <form action="php/style.php" method="POST">
                                     <select class="form-control" name="bgc" onchange="this.form.submit();">
-                                        <option value="light.css" <?php if ($style["style"] == "light.css") {
+                                        <option value="light.css" <?php if ($settings["style"] == "light.css") {
                                                                         echo "selected";
                                                                     } ?>>Fehér</option>
-                                        <option value="dark.css" <?php if ($style["style"] == "dark.css") {
+                                        <option value="dark.css" <?php if ($settings["style"] == "dark.css") {
                                                                         echo "selected";
                                                                     } ?>>Fekete</option>
                                     </select>
@@ -118,7 +107,7 @@ require("parts/head.php");
                     <button class="list-group-item" aria-current="true" onclick="start()">Indulás</button>
                     <button class="list-group-item" onclick="arrive()">Érkezés</button>
                 </div>
-                <!-- Érkező járatok -->
+                <!-- Érkező járatok táblája -->
                 <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="dest" style="display: none">
                     <thead>
                         <tr>
@@ -144,10 +133,6 @@ require("parts/head.php");
                                     isset($data["arrival_airport"]) && $data["arrival_airport"] == $kivalasztottRepter && TimeDifference(date('H:i'), $data["arrival_scheduled"]) < $datas->GetIntervalHours()
                                 ) : ?>
                                     <?php
-                                    /**
-                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
-                                     * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg. --> uptade(pár nappal később): valamiért nem jó, kerestem másik megoldást
-                                     */
                                     ++$counter;
                                     ?>
                                     <tr>
@@ -180,7 +165,7 @@ require("parts/head.php");
                     </tbody>
                 </table>
 
-                <!-- Induló járatok -->
+                <!-- Induló járatok táblája-->
 
                 <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="start">
                     <thead>
@@ -204,10 +189,6 @@ require("parts/head.php");
                             <?php foreach ($getDatas as $data) : ?>
                                 <?php if (isset($data["departure_airport"]) && $data["departure_airport"] == $kivalasztottRepter && TimeDifference(date('H:i'), $data["departure_scheduled"]) < $datas->GetIntervalHours()) : ?>
                                     <?php
-                                    /**
-                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
-                                     * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg. --> uptade(pár nappal később): valamiért nem jó, kerestem másik megoldást
-                                     */
                                     ++$counter;
                                     ?>
                                     <tr>
