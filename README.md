@@ -29,10 +29,10 @@
 >>Környezet
 >>>Az oldal bármilyen böngészőben futtatható.
 
->Használata
->>Alkalmazások
->>>Alkalmazások: Docker Desktop, Visual Studio Code, GitHub Desktop\
->>>Letöltjük a GitHub-ról a projektünket, megnyitjuk a Visual Studio Code-ban. A menüpontokból kiválasztjuk a Terminalt majd New Terminalt.  Eközben elindítjuk a docker 	 programot. Ha ez megtörtént, visszalépünk a kódunkhoz és beírjuk a következőt: docker-compose up -d web. Ahhoz, hogy sikerüljön kell a projekt mappánkban lennie egy conf 	   és egy www mappának, valamint egy .env, egy docker-compose.yml valamint egy Dockerfile-nak.
+>>Használata
+>>>Alkalmazások
+>>>>Alkalmazások: Docker Desktop, Visual Studio Code, GitHub Desktop\
+>>>>Letöltjük a GitHub-ról a projektünket, megnyitjuk a Visual Studio Code-ban. A menüpontokból kiválasztjuk a Terminalt majd New Terminalt.  Eközben elindítjuk a docker 	 programot. Ha ez megtörtént, visszalépünk a kódunkhoz és beírjuk a következőt: docker-compose up -d web. Ahhoz, hogy sikerüljön kell a projekt mappánkban lennie egy conf 	   és egy www mappának, valamint egy .env, egy docker-compose.yml valamint egy Dockerfile-nak.
 
 >>Kezdőlap
 >>>Az oldal tetején egy menüsáv található, ahol az alábbi menüpontok vanna: Rólunk, Hivatkozások (ezek átirányítanak egy másik oldalra), egy lenyíló lista (ahol ki lehet választani a repülőteret, majd a hozzátartozó adatok megjelennek), egy gomb (amin ki lehet választani, hogy fehér vagy fekete színű legyen a háttérszín), egy ikon gomb (az adatok frissítését szolgálja).\
