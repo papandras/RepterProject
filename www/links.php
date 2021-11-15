@@ -23,10 +23,12 @@ require("parts/head.php");
     <div class="container">
         <header>
             <!-- Navbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white">
-                <div class="container-fluid" style="position: relative;">
-                                
-                    <div class="collapse navbar-collapse" id="navbarExample01">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item active">
                                 <a class="nav-link" aria-current="page" href="index.php">Kezdőlap</a>
@@ -73,7 +75,7 @@ require("parts/head.php");
                         <p><?= $all[0] ?></p>
                     </td>
                     <td>
-                        <a href="<?= $all[1]?>" target="_blank">###</a>
+                        <a href="<?= $all[1] ?>" target="_blank">###</a>
                     </td>
                 </tr>
             <?php } ?>
@@ -84,36 +86,36 @@ require("parts/head.php");
         <!-- Táblázat -->
 
         <table class="table table-hover table-<?php echo $table ?> table-responsive text-center mt-3" id="start" style="width: 50%; margin-left: auto; margin-right: auto">
-                    <thead>
+            <thead>
+                <tr>
+                    <th colspan="2">A felhasznált légitársaságok honlapjai</th>
+                </tr>
+                <tr>
+                    <th scope="col">Légitársaság</th>
+                    <th scope="col">Honlap</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $getDatas = $datas->GetAirlines($repterek);
+                $counter = 0;
+                ?>
+                <?php if (!is_null($getDatas)) : ?>
+                    <?php foreach ($getDatas as $data) : ?>
                         <tr>
-                            <th colspan="2">A felhasznált légitársaságok honlapjai</th>
+                            <td><?php echo $data; ?></td>
+                            <td><a href="<?php echo "http://" . strtolower(str_replace("'", "", str_replace(" ", "", $data) . ".com")); ?>" target="_blank">Részletek</a></td>
                         </tr>
-                        <tr>
-                            <th scope="col">Légitársaság</th>
-                            <th scope="col">Honlap</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $getDatas = $datas->GetAirlines($repterek); 
-                        $counter = 0;
-                        ?>
-                        <?php if(!is_null($getDatas)):?>
-                            <?php foreach($getDatas as $data): ?>
-                                    <tr>
-                                        <td><?php echo $data; ?></td>
-                                        <td><a href="<?php echo "http://".strtolower(str_replace("'","",str_replace(" ","",$data) . ".com")); ?>" target="_blank">Részletek</a></td>
-                                    </tr>
 
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
 
         <!-- Táblázat -->
         <div id="load">
             <?php
-                require("parts/footer.php");
+            require("parts/footer.php");
             ?>
         </div>
     </div>

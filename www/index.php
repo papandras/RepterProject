@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A request.php-ban letöltött adatokat olvassa be.
  */
@@ -17,6 +18,7 @@ require("php/sheet.php");
 <?php
 require("parts/head.php");
 ?>
+
 <body>
     <!-- A mozgó repülők ezekben vannak (main.css) -->
     <div class="plane" id="plane"></div>
@@ -24,10 +26,13 @@ require("parts/head.php");
     <div class="container">
         <header>
             <!-- Navbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white">
-                <div class="container-fluid" style="position: relative;">
-                                
-                    <div class="collapse navbar-collapse" id="navbarExample01">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a>Reptér információk</a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item active">
                                 <a class="nav-link" aria-current="page" href="index.php">Kezdőlap</a>
@@ -35,21 +40,21 @@ require("parts/head.php");
                             <li class="nav-item">
                                 <a class="nav-link" href="links.php">Hivatkozások</a>
                             </li>
-                            <li style="position: absolute; right: 10%; width: 100%">
+                            <li class="hide nav-item" style="position: absolute; right: 10%; width: 100%">
                                 <form action="php/airport.php" method="post">
-                                    <!--   <label style="color: black; position: absolute; right: 380px; top: 5px;">Válassz repteret:</label>     -->
                                     <select class="form-control" style="position: absolute; right: 100px;  top: 0px; width: 20%;" name="repter" onchange="this.form.submit();">
                                         <option value="">Válassz repteret</option>
-                                        <?php foreach($datas->GetAirports($repterek) as $repter): ?>
-                                            <?php if($repter != null): ?>
-                                                <option value="<?php echo $repter; ?>" <?php if($kivalasztottRepter==$repter){echo "selected";} ?>><?php echo $repter ?></option>
+                                        <?php foreach ($datas->GetAirports($repterek) as $repter) : ?>
+                                            <?php if ($repter != null) : ?>
+                                                <option value="<?php echo $repter; ?>" <?php if ($kivalasztottRepter == $repter) {
+                                                                                            echo "selected";
+                                                                                        } ?>><?php echo $repter ?></option>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
-                                    <!-- <input type="submit" style="position: absolute; right: 10px; top: 0px;" class="btn btn-success" value="Mutasd"> -->
                                 </form>
                             </li>
-                            <li style="position: absolute; right: 10%;">
+                            <li class="hide nav-item" style="position: absolute; right: 10%;">
                                 <?php
                                 /**
                                  * Ebben a formban cserélődnek a stíluslapok
@@ -63,13 +68,17 @@ require("parts/head.php");
                                 ?>
                                 <form action="php/style.php" method="POST">
                                     <select class="form-control" name="bgc" onchange="this.form.submit();">
-                                        <option value="light.css" <?php if($style["style"]=="light.css"){echo "selected";} ?>>Fehér</option>
-                                        <option value="dark.css" <?php if($style["style"]=="dark.css"){echo "selected";} ?>>Fekete</option>
+                                        <option value="light.css" <?php if ($style["style"] == "light.css") {
+                                                                        echo "selected";
+                                                                    } ?>>Fehér</option>
+                                        <option value="dark.css" <?php if ($style["style"] == "dark.css") {
+                                                                        echo "selected";
+                                                                    } ?>>Fekete</option>
                                     </select>
                                 </form>
                             </li>
-                            <li style="position: absolute; right: 8%;">
-                                <button class="btn" style="position: absolute; top: 0px;" onclick="refresh()"><img src="./img/refresh.png" style="height: 30px;" title="Adatok legutóbb frissítve: <?php echo date ("Y F d H:i:s.", filemtime("data.json")) ?>"></button>
+                            <li class="hide nav-item" style="position: absolute; right: 8%;">
+                                <button class="btn refresh" style="position: absolute; top: 0px;" onclick="refresh()"><img src="./img/refresh.png" style="height: 30px;" title="Adatok legutóbb frissítve: <?php echo date("Y F d H:i:s.", filemtime("data.json")) ?>"></button>
                             </li>
                         </ul>
                     </div>
@@ -109,7 +118,7 @@ require("parts/head.php");
                     <button class="list-group-item" aria-current="true" onclick="start()">Indulás</button>
                     <button class="list-group-item" onclick="arrive()">Érkezés</button>
                 </div>
-                
+
                 <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="dest" style="display: none">
                     <thead>
                         <tr>
@@ -125,45 +134,46 @@ require("parts/head.php");
                     </thead>
                     <tbody>
                         <?php
-                            $getDatas = $datas->GetDatas($repterek);
-                            $counter = 0;
+                        $getDatas = $datas->GetDatas($repterek);
+                        $counter = 0;
                         ?>
-                        <?php if(!is_null($getDatas)):?>
-                            <?php foreach($getDatas as $data):?>
-                                <?php if(isset($data["arrival_airport"]) && $data["arrival_airport"] == $kivalasztottRepter && TimeDifference(date('H:i'), $data["arrival_scheduled"]) < $datas->GetIntervalHours()
-                                ):?>
+                        <?php if (!is_null($getDatas)) : ?>
+                            <?php foreach ($getDatas as $data) : ?>
+                                <?php if (
+                                    isset($data["arrival_airport"]) && $data["arrival_airport"] == $kivalasztottRepter && TimeDifference(date('H:i'), $data["arrival_scheduled"]) < $datas->GetIntervalHours()
+                                ) : ?>
                                     <?php
                                     /**
-                                    * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
-                                    * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg. --> uptade(pár nappal később): valamiért nem jó, kerestem másik megoldást
-                                    */
+                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
+                                     * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg. --> uptade(pár nappal később): valamiért nem jó, kerestem másik megoldást
+                                     */
                                     ++$counter;
                                     ?>
                                     <tr>
-                                        <td><?php echo $data["arrival_scheduled"];?></td>
+                                        <td><?php echo $data["arrival_scheduled"]; ?></td>
                                         <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["arrival_terminal"]; ?></td>
                                         <td>
                                             <?php echo $data["status"];
-                                            if(!is_null($data["arrival_delay"])):
+                                            if (!is_null($data["arrival_delay"])) :
                                             ?>
-                                                <sub><?php echo "<br>Késik: ". $data["arrival_delay"]." percet"; ?></sub>
+                                                <sub><?php echo "<br>Késik: " . $data["arrival_delay"] . " percet"; ?></sub>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
-                        <?php if($counter == 0):?>
-                                <?php
-                                /**
-                                 * Ha nics éppen repülő, kiírjuk hogy nincsen.
-                                 */
-                                ?>
-                                <tr>
-                                    <td colspan="5" class="text-center"><strong>Nincs érkező repülőgép!</strong></td>
-                                </tr>
+                        <?php if ($counter == 0) : ?>
+                            <?php
+                            /**
+                             * Ha nics éppen repülő, kiírjuk hogy nincsen.
+                             */
+                            ?>
+                            <tr>
+                                <td colspan="5" class="text-center"><strong>Nincs érkező repülőgép!</strong></td>
+                            </tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
@@ -183,58 +193,58 @@ require("parts/head.php");
                     </thead>
                     <tbody>
                         <?php
-                            $counter = 0;
+                        $counter = 0;
                         ?>
-                        <?php if(!is_null($getDatas)):?>
-                            <?php foreach($getDatas as $data): ?>
-                                <?php if(isset($data["departure_airport"]) && $data["departure_airport"] == $kivalasztottRepter && TimeDifference(date('H:i'), $data["departure_scheduled"]) < $datas->GetIntervalHours()):?>
+                        <?php if (!is_null($getDatas)) : ?>
+                            <?php foreach ($getDatas as $data) : ?>
+                                <?php if (isset($data["departure_airport"]) && $data["departure_airport"] == $kivalasztottRepter && TimeDifference(date('H:i'), $data["departure_scheduled"]) < $datas->GetIntervalHours()) : ?>
                                     <?php
                                     /**
-                                    * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
-                                    * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg. --> uptade(pár nappal később): valamiért nem jó, kerestem másik megoldást
-                                    */
+                                     * (strtotime(date('H:i')) - strtotime($data["time"])) / 60 < 480
+                                     * Ezzel számítom ki hogy a 8 órán belül induló / érkező gépeket jelenítse csak meg. --> uptade(pár nappal később): valamiért nem jó, kerestem másik megoldást
+                                     */
                                     ++$counter;
                                     ?>
                                     <tr>
-                                        <td><?php echo $data["departure_scheduled"];?></td>
+                                        <td><?php echo $data["departure_scheduled"]; ?></td>
                                         <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["departure_terminal"]; ?></td>
                                         <td>
                                             <?php echo $data["status"];
-                                            if(!is_null($data["departure_delay"])):
+                                            if (!is_null($data["departure_delay"])) :
                                             ?>
-                                                <sub><?php echo "<br>Késik: ". $data["departure_delay"]." percet"; ?></sub>
+                                                <sub><?php echo "<br>Késik: " . $data["departure_delay"] . " percet"; ?></sub>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
-                        <?php if($counter == 0):?>
-                                <?php
-                                /**
-                                 * Ha nics éppen repülő, kiírjuk hogy nincsen.
-                                 */
-                                ?>
-                                <tbody>
-                                    <td colspan="5" class="text-center"><strong>Nincs induló repülőgép!</strong></td>
-                                </tbody>
-                        <?php endif; ?>
+                        <?php if ($counter == 0) : ?>
+                            <?php
+                            /**
+                             * Ha nics éppen repülő, kiírjuk hogy nincsen.
+                             */
+                            ?>
+                    <tbody>
+                        <td colspan="5" class="text-center"><strong>Nincs induló repülőgép!</strong></td>
                     </tbody>
+                <?php endif; ?>
+                </tbody>
                 </table>
             </div>
         </main>
-                    
+
         <?php
-            /**
-             * A footer.php-t hívja meg a script.js-ben használt setInterval segítségével
-             * 10 másodpercenként frissül.
-             */
+        /**
+         * A footer.php-t hívja meg a script.js-ben használt setInterval segítségével
+         * 10 másodpercenként frissül.
+         */
         ?>
         <div id="load">
             <?php
-                require("parts/footer.php");
+            require("parts/footer.php");
             ?>
         </div>
     </div>

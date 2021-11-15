@@ -1,4 +1,4 @@
-#plane{
+#plane {
     height: 174px;
     width: 300px;
     background-image: url("../img/bg_bb.png");
@@ -8,7 +8,7 @@
     animation: moving 15s infinite;
 }
 
-#plane2{
+#plane2 {
     height: 174px;
     width: 300px;
     background-image: url("../img/bg_b.png");
@@ -18,7 +18,7 @@
     animation: back 15s infinite;
 }
 
-body{
+body {
     width: 70%;
     margin: auto;
     position: relative;
@@ -28,7 +28,7 @@ body::-webkit-scrollbar {
     display: block;
 }
 
-main div{
+main div {
     max-height: 500px;
     padding: 1rem;
     margin: 1rem;
@@ -56,74 +56,115 @@ main div::-webkit-scrollbar-thumb {
     animation: txt 5s infinite;
 }
 
+.zoomclass {
+    z-index: 999;
+    width: 120%;
+    padding-top: 9%;
+    padding-bottom: 9%;
+    margin-left: -10%;
+    margin-right: 10%;
+    border: 2px solid darkblue;
+    background-color: lightblue;
+    background-image: url("https://www.savethestudent.org/uploads/flights.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 @-webkit-keyframes txt {
-    from {right: 5%;}
-    to {right: 60%;}
+    from {
+        right: 5%;
+    }
+    to {
+        right: 60%;
+    }
 }
 
 @keyframes txt {
-    from {left: 5%;}
-    to {left: 60%;}
+    from {
+        left: 5%;
+    }
+    to {
+        left: 60%;
+    }
 }
-		
+
 @-webkit-keyframes moving {
-    from {right: 3%;}
-    to {right: 75%;}
+    from {
+        right: 3%;
+    }
+    to {
+        right: 75%;
+    }
 }
 
 @keyframes moving {
-    from {left: 3%;}
-    to {left: 75%;}
+    from {
+        left: 3%;
+    }
+    to {
+        left: 75%;
+    }
 }
 
 @-webkit-keyframes back {
-    from {right: 75%;}
-    to {right: 3%;}
+    from {
+        right: 75%;
+    }
+    to {
+        right: 3%;
+    }
 }
 
 @keyframes back {
-    from {left: 75%;}
-    to {left: 3%;}
+    from {
+        left: 75%;
+    }
+    to {
+        left: 3%;
+    }
 }
 
-th,td{
+th,
+td {
     width: 20%;
 }
 
-@media (max-width: 1200px) {
-   
-}
-@media (max-width: 992px) {	
- 
-}
+@media (max-width: 1200px) {}
 
-@media screen and (max-width: 1200px){
-    body{
+@media (max-width: 992px) {}
+
+@media screen and (max-width: 1200px) {
+    body {
         width: 100%;
         padding: 0px;
         margin: 0px;
         border-width: 0px;
     }
-    .container{
+    .container {
         padding: 0px;
     }
-    .bg-image{
+    .bg-image {
         width: 768px;
         background-size: contain;
     }
-    .jaratszam, .tarsasag{
+    .jaratszam,
+    .tarsasag {
         display: none;
     }
-    table{
+    table {
         width: 20%;
     }
-    footer .container{
+    footer .container {
         display: none;
     }
-    #tablemenu>button{
+    footer {
+        width: 100%;
+    }
+    #tablemenu>button {
         height: 200%;
     }
-    #plane,#plane2{
+    #plane,
+    #plane2 {
         display: none;
     }
     #movetxt {
@@ -132,5 +173,25 @@ th,td{
         animation: none;
         margin: 10px;
         text-align: center;
+    }
+    .hide {
+        position: default;
+        left: default;
+    }
+    .refresh {
+        display: none;
+    }
+    .zoomclass {
+        z-index: 999;
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
+        display: block;
+        margin: auto;
+        border: 2px solid darkblue;
+        background-color: lightblue;
+        background-image: url("https://www.savethestudent.org/uploads/flights.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 }

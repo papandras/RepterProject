@@ -4,12 +4,9 @@ require("sheet.php");
 
 $style = json_decode(file_get_contents("../settings.json"), true);
 
-if(!isset($_POST["repter"]))
-{
+if (!isset($_POST["repter"])) {
     $style = json_decode(file_get_contents("../settings.json"), true);
-}
-else
-{
+} else {
     $style["airport"] = $_POST["repter"] ?? "";
     $kivalasztottRepter == "" ? $kivalasztottRepter = "Shenzhen" : $kivalasztottRepter = $_POST["repter"];
 }
