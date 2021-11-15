@@ -189,11 +189,9 @@
             background-size: contain;
         }
         .jaratszam,
-        .tarsasag {
+        .tarsasag,
+        .terminal {
             display: none;
-        }
-        table {
-            width: 20%;
         }
         footer .container {
             display: none;

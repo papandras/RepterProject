@@ -118,7 +118,7 @@ require("parts/head.php");
                             <th scope="col">Honnan</th>
                             <th scope="col" class="tarsasag">Légitársaság</th>
                             <th scope="col" class="jaratszam">Járatszám</th>
-                            <th scope="col">Terminál</th>
+                            <th scope="col" class="terminal">Terminál</th>
                             <th scope="col">Státusz</th>
                         </tr>
                     </thead>
@@ -140,7 +140,7 @@ require("parts/head.php");
                                         <td><?php echo $data["departure_airport"]; ?></td>
                                         <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
-                                        <td><?php echo $data["arrival_terminal"]; ?></td>
+                                        <td class="terminal"><?php echo $data["arrival_terminal"]; ?></td>
                                         <td>
                                             <?php echo $data["status"];
                                             if (!is_null($data["arrival_delay"])) :
@@ -177,7 +177,7 @@ require("parts/head.php");
                             <th scope="col">Hova</th>
                             <th scope="col" class="tarsasag">Légitársaság</th>
                             <th scope="col" class="jaratszam">Járatszám</th>
-                            <th scope="col">Terminál</th>
+                            <th scope="col" class="terminal">Terminál</th>
                             <th scope="col">Státusz</th>
                         </tr>
                     </thead>
@@ -196,7 +196,7 @@ require("parts/head.php");
                                         <td><?php echo $data["arrival_airport"]; ?></td>
                                         <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
-                                        <td><?php echo $data["departure_terminal"]; ?></td>
+                                        <td class="terminal"><?php echo $data["departure_terminal"]; ?></td>
                                         <td>
                                             <?php echo $data["status"];
                                             if (!is_null($data["departure_delay"])) :
