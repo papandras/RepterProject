@@ -1,5 +1,6 @@
 <?php
 error_reporting(0);
+
 function TimeDifference($timeFrom, $timeTo)
 {
     $timeFrom = new DateTime($timeFrom);
@@ -22,30 +23,7 @@ class Datas
     private $airportsData = array();
     private $airports = array();
     private $airlines = array();
-    private $intervalHour;
-    private $valami;
-
-    public function GetVmi()
-    {
-        return $this->valami;
-    }
-
-    public function TimeDifference($timeFrom, $timeTo)
-    {
-        $timeFrom = new DateTime($timeFrom);
-        $timeTo = new DateTime($timeTo);
-        if ($timeFrom < $timeTo) {
-            $interval = $timeFrom->diff($timeTo);
-            return $interval;
-        } elseif ($timeFrom > $timeTo) {
-            $from = $timeFrom->format('H') + $timeFrom->format('i') / 60;
-            $to = $timeTo->format('H') + $timeFrom->format('i') / 60;
-            $interval = 24 - $from + $to;
-            return $interval;
-        } else {
-            return "Egyenlő";
-        }
-    }
+    private static $intervalHour;
 
     public function __construct($inputArray, $intervalHour)
     {
@@ -90,7 +68,6 @@ class Datas
 
                 array_push($this->airportsData, $helper);
 
-                $this->valami = $helper["departure_scheduled"];
                 if (TimeDifference(date('H:i'), $helper["departure_scheduled"]) < $this->intervalHour) {
                     array_push($this->airports, $helper["departure_airport"]);
                 }

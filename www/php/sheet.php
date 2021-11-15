@@ -15,9 +15,9 @@ if ($kivalasztottRepter == "Jelenleg egyik reptérről sem indul/érkezik járat
     $kivalasztottRepter = "";
 }
 
-$style = json_decode(file_get_contents("settings.json"), true);
+$settings = json_decode(file_get_contents("settings.json"), true);
 
 $table = "light";
-if ($style["style"] == "light.css") {
+if ($settings["style"] == "light.css") {
     $table = "dark";
 }

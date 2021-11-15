@@ -118,14 +118,15 @@ require("parts/head.php");
                     <button class="list-group-item" aria-current="true" onclick="start()">Indulás</button>
                     <button class="list-group-item" onclick="arrive()">Érkezés</button>
                 </div>
-
+                <!-- Érkező járatok -->
                 <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="dest" style="display: none">
                     <thead>
                         <tr>
-                            <td colspan="5" class="text-center">Érkező járatok<br>*<sub>A táblázat csak a 8 órán belül érkező járatokat tartalmazza!</sub></td>
+                            <td colspan="6" class="text-center">Érkező járatok<br>*<sub>A táblázat csak a 8 órán belül érkező járatokat tartalmazza!</sub></td>
                         </tr>
                         <tr>
                             <th scope="col">Időpont</th>
+                            <th scope="col">Honnan</th>
                             <th scope="col" class="tarsasag">Légitársaság</th>
                             <th scope="col" class="jaratszam">Járatszám</th>
                             <th scope="col">Terminál</th>
@@ -151,6 +152,7 @@ require("parts/head.php");
                                     ?>
                                     <tr>
                                         <td><?php echo $data["arrival_scheduled"]; ?></td>
+                                        <td><?php echo $data["departure_airport"]; ?></td>
                                         <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["arrival_terminal"]; ?></td>
@@ -172,19 +174,22 @@ require("parts/head.php");
                              */
                             ?>
                             <tr>
-                                <td colspan="5" class="text-center"><strong>Nincs érkező repülőgép!</strong></td>
+                                <td colspan="6" class="text-center"><strong>Nincs érkező repülőgép!</strong></td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
 
+                <!-- Induló járatok -->
+
                 <table class="table table-hover table-<?php echo $table ?> table-responsive text-center" id="start">
                     <thead>
                         <tr>
-                            <td colspan="5" class="text-center">Induló járatok<br>*<sub>A táblázat csak a 8 órán belül induló járatokat tartalmazza!</sub></td>
+                            <td colspan="6" class="text-center">Induló járatok<br>*<sub>A táblázat csak a 8 órán belül induló járatokat tartalmazza!</sub></td>
                         </tr>
                         <tr>
                             <th scope="col">Időpont</th>
+                            <th scope="col">Hova</th>
                             <th scope="col" class="tarsasag">Légitársaság</th>
                             <th scope="col" class="jaratszam">Járatszám</th>
                             <th scope="col">Terminál</th>
@@ -207,6 +212,7 @@ require("parts/head.php");
                                     ?>
                                     <tr>
                                         <td><?php echo $data["departure_scheduled"]; ?></td>
+                                        <td><?php echo $data["arrival_airport"]; ?></td>
                                         <td class="tarsasag"><?php echo $data["airline"]; ?></td>
                                         <td class="jaratszam"><?php echo $data["number"]; ?></td>
                                         <td><?php echo $data["departure_terminal"]; ?></td>
@@ -228,7 +234,7 @@ require("parts/head.php");
                              */
                             ?>
                     <tbody>
-                        <td colspan="5" class="text-center"><strong>Nincs induló repülőgép!</strong></td>
+                        <td colspan="6" class="text-center"><strong>Nincs induló repülőgép!</strong></td>
                     </tbody>
                 <?php endif; ?>
                 </tbody>
