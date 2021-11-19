@@ -1,20 +1,51 @@
-version: '2'
+version: "3"
 services:
-    php:
-        build: php
-        expose:
-            - 9000
-        volumes:
-            - ./RepterProject
+  web:
+    image: httpd:2.4-alpine
+    ports:
+      - "${WEB_PORT-801}:80"
+    volumes:
+      - ./conf/httpd.conf:/usr/local/apache2/conf/httpd.conf:z
+      - ./conf/httpd.my.conf:/usr/local/apache2/conf/httpd.my.conf:ro
+      - ./www:/usr/local/apache2/htdocs/:z
+    depends_on:
+      - php
+    networks:
+      - web
+  php:
+    image: laradock/php-fpm:latest-8.0
+    volumes:
+      - ./www:/var/www/html:z
+    networks:
+      - web
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PASSWORD=${DB_PASSWORD}
+      
+  db:
+    image: ubuntu/mysql:8.0-20.04_beta
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    networks:
+      - web
 
-    apache2:
-        image: webdevops/apache:latest
-        args:
-            - PHP_SOCKET=php:9000
-        volumes:
-            - ./RepterProject
-        ports:
-            - 80:80
-            - 443:443
-        links:
-            - php
+  phpmyadmin:
+    image: phpmyadmin
+    depends_on:
+      - db
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306 
+      - PMA_USER=${DB_USER-root}
+      - PMA_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${DB_PORT-802}:80"
+    networks:
+      - web
+networks: 
+  web:
+    driver: bridge
